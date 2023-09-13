@@ -12,9 +12,9 @@ const siteConfig = Object.freeze({
 
 
     //ENDPOINTS PROPERTIES
-    LOGIN:"/api/login/",
-    GET_USER_BY_ACCESSTOKEN_URL:"/me/",
-    ACCOUNT:"/accounts"
+    LOGIN:"/account/api/login/",
+    GET_USER_BY_ACCESSTOKEN_URL:"/account/me/",
+    STAGE1:"/app/api/scheme-details/"
   });
   
   export default siteConfig;

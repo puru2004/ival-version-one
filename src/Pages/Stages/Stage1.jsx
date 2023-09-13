@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect } from "react";
 import * as ReactDOM from "react-dom";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
@@ -22,7 +22,12 @@ import {
 import "./common.css";
 import { DropDownList } from "@progress/kendo-react-dropdowns";
 import { DatePicker } from "@progress/kendo-react-dateinputs";
-import Stage from "./_request"
+// import Stage from "./_request"
+import { stageDataRequest } from "./store/request";
+import { ENUM_API_STATUS } from "../../utils/_gConstant";
+import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
+import { toastSuccess } from "../../components/ui-elements/_Toastify";
+import { useSelector } from "react-redux";
 
 // Define the data for your dropdown options
 const lastNameOptions = ["Option 1", "Option 2", "Option 3"];
@@ -33,7 +38,19 @@ const datepickerOptions = {
 };
 
 const Stage1 = () => {
-  const handleSubmit = (dataItem) => {const res = Stage(url, {dataItem})};
+  const handleSubmit = async (dataItem) => {
+    const res = await stageDataRequest(dataItem)
+    if(res?.data?.status === ENUM_API_STATUS.ERROR){
+      handleAPIErrors(res?.data)
+    } else {
+      toastSuccess(res?.data?.message)
+    }
+  };
+  const data = useSelector((state)=>state.login);
+    console.log(data,"redux-check");
+
+
+  
   return (
     <Form
       onSubmit={handleSubmit}
@@ -55,26 +72,26 @@ const Stage1 = () => {
               }}
             >
               <Field
-                id={"Land Ownership Status"}
-                name={"Land Ownership Status"}
-                label={"Land Ownership Status"}
+                id={"Scheme name *"}
+                name={"Scheme name *"}
+                label={"Scheme name *"}
                 component={FormInput}
                 // validator={nameValidator}
                 style={{ width: "350px", lineHeight: 2 }}
               />
               <Field
-                id={"Land Election VAT"}
-                name={"Land Election VAT"}
-                label={"Land Election VAT"}
+                id={"Scheme address"}
+                name={"Scheme address"}
+                label={"Scheme address"}
                 component={FormInput}
                 // validator={nameValidator}
                 style={{ width: "350px", lineHeight: 2 }}
               />
               <Field
-                id={"email"}
-                name={"email"}
-                label={"Email"}
-                type={"email"}
+                id={"Postcode"}
+                name={"Postcode"}
+                label={"Postcode"}
+                type={"Postcode"}
                 component={FormInput}
                 // validator={emailValidator}
                 style={{ width: "350px", lineHeight: 2 }}
@@ -87,9 +104,9 @@ const Stage1 = () => {
                 paddingTop: "1.5rem", paddingBottom: "1.5rem",
               }}
             >
-              <label className="">Last name</label>
+              <label className="">Local Authority *</label>
               <DropDownList
-                name="lastName"
+                name="Local Authority *"
                 data={lastNameOptions}
                 defaultValue={lastNameOptions[0]} // Set the default selected value
                 className="custom-dropdown"
@@ -112,9 +129,9 @@ const Stage1 = () => {
                   paddingTop: "1.5rem", paddingBottom: "1.5rem",
                 }}
               >
-                <label className="">Last name</label>
+                <label className="">Land Ownership Status *</label>
                 <DropDownList
-                  name="lastName"
+                  name="Land Ownership Status"
                   data={lastNameOptions}
                   defaultValue={lastNameOptions[0]} // Set the default selected value
                   className="custom-dropdown"
@@ -128,9 +145,9 @@ const Stage1 = () => {
                   paddingTop: "1.5rem", paddingBottom: "1.5rem",
                 }}
               >
-                <label className="">Last name</label>
+                <label className="">Land Election VAT </label>
                 <DropDownList
-                  name="lastName"
+                  name="Land Election VAT "
                   data={lastNameOptions}
                   defaultValue={lastNameOptions[0]} // Set the default selected value
                   className="custom-dropdown"
@@ -145,7 +162,7 @@ const Stage1 = () => {
                   width: "350px",
                 }}
               >
-                <label className="">Date of Birth</label>
+                <label className="">Land Completion/Acquisition Date</label>
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
@@ -311,7 +328,7 @@ const Stage1 = () => {
                 style={{ width: "250px", lineHeight: 2 }}
               />
           </fieldset>
-          <button type="submit"></button>
+          <button type="submit"> submit data</button>
           
         </FormElement>
       )}

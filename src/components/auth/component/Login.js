@@ -6,6 +6,8 @@ import { login, getUserByToken } from "../core/_request";
 import LocalStorageServices from "../../../services/_localStorageServices";
 import { useAuth } from "../core/Auth";
 import siteConfig from "../../../services/_siteConfig";
+import { useDispatch } from "react-redux";
+import { addUserData } from "../../../state/actions/loginActions";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,6 +28,7 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -41,11 +44,14 @@ const Login = () => {
             data: auth 
         } = await login(values.email, values.password);
         saveAuth(auth?.access);
-        navigate("/stepper");
+        
         const {
            data: user 
         } = await getUserByToken(auth?.token);
         setCurrentUser(user);
+        console.log(';suer', user);
+        dispatch(addUserData(user));
+        navigate("/stepper");
       } catch (error) {
         console.error(error);
 

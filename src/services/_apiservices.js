@@ -85,9 +85,6 @@ class ApiService {
   }
 
 
-  //stg1, d
-  // stg2, d
-  // stg3, d
   async post(url, body) {
     let res;
     await api
