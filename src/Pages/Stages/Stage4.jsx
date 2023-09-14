@@ -24,6 +24,10 @@ import {
 import { ExternalDropZone, Upload } from "@progress/kendo-react-upload";
 import DropZone from "../../components/dropzone/DropZone";
 import KendoButton from "../../components/button/ButtonComponent";
+import { stage4DataRequest } from "./store/request";
+import { ENUM_API_STATUS } from "../../utils/_gConstant";
+import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
+import { toastSuccess } from "../../components/ui-elements/_Toastify";
 
 const Stage4 = () => {
   const [selectedValue, setSelectedValue] = React.useState("first");
@@ -33,7 +37,14 @@ const Stage4 = () => {
     },
     [setSelectedValue]
   );
-  const handleSubmit = (dataItem) => alert(JSON.stringify(dataItem, null, 2));
+  const handleSubmit = async(dataItem) => {
+    const res = await stage4DataRequest(dataItem)
+    if(res?.data?.status === ENUM_API_STATUS.ERROR){
+      handleAPIErrors(res?.data)
+    } else {
+      toastSuccess(res?.data?.message)
+    }
+  };
   return (
     <>
       <Form

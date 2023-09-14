@@ -23,6 +23,10 @@ import {
 } from "../../components/forminput/validator";
 import { ExternalDropZone, Upload } from "@progress/kendo-react-upload";
 import DropZone from "../../components/dropzone/DropZone";
+import { stage2DataRequest } from "./store/request";
+import { ENUM_API_STATUS } from "../../utils/_gConstant";
+import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
+import { toastSuccess } from "../../components/ui-elements/_Toastify";
 
 const Stage2 = () => {
   const [selectedValue, setSelectedValue] = React.useState("first");
@@ -32,7 +36,14 @@ const Stage2 = () => {
     },
     [setSelectedValue]
   );
-  const handleSubmit = (dataItem) => alert(JSON.stringify(dataItem, null, 2));
+  const handleSubmit = async (dataItem) => {
+    const res = await stage2DataRequest(dataItem)
+    if(res?.data?.status === ENUM_API_STATUS.ERROR){
+      handleAPIErrors(res?.data)
+    } else {
+      toastSuccess(res?.data?.message)
+    }
+  }
   return (
     <Form
       onSubmit={handleSubmit}

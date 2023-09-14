@@ -2,8 +2,20 @@ import React from "react";
 import "./common.css";
 import KendoButton from "../../components/button/ButtonComponent";
 import DropZone from "../../components/dropzone/DropZone";
+import { stage3DataRequest } from "./store/request";
+import { ENUM_API_STATUS } from "../../utils/_gConstant";
+import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
+import { toastSuccess } from "../../components/ui-elements/_Toastify";
 
 const Stage3 = () => {
+  const handleSubmit = async(dataItem)=>{
+    const res = await stage3DataRequest(dataItem)
+    if(res?.data?.status === ENUM_API_STATUS.ERROR){
+      handleAPIErrors(res?.data)
+    } else {
+      toastSuccess(res?.data?.message)
+    }
+  }
   return (
     <>
       <div className="heading">Lorem ipsum dolor sit amet consectetur.</div>

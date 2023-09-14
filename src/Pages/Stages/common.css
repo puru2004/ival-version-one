@@ -70,3 +70,20 @@
     padding-top: 2rem;
   }
 
+  .container {
+   
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Position it at the top of the viewport */
+    right: 0; /* Position it at the right of the viewport */
+    background-color: white;
+    height: 3rem;
+    width: 100%;
+    display: flex; /* Enable flex layout */
+    justify-content: flex-end; /* Move button to the right */
+    align-items: center; /* Vertically center the button */
+    /* z-index: 999; Optional: To make sure it's on top of other content */
+  }
+  
+  /* Style for the button */
+  
+
