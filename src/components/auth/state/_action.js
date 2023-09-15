@@ -1,57 +1,23 @@
-const AuthActionTypes = {
-    LOGIN_STARTED: 'LOGIN_STARTED',
-    LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-    LOGIN_FAILURE: 'LOGIN_FAILURE',
-    FETCH_AUTH_USER_SUCCESS: 'FETCH_AUTH_USER_SUCCESS',
-    FETCH_AUTH_USER_FAILURE: 'FETCH_AUTH_USER_FAILURE',
-    LOGIN: 'LOGIN',
-    LOGOUT: 'LOGOUT',
-    REGISTER: 'REGISTER',
-    GET_AUTH_USER: 'GET_AUTH_USER',
-    SET_AUTH_USER: 'SET_AUTH_USER',
-    GET_USER_PERMISSIONS: 'GET_USER_PERMISSIONS',
-    SET_USER_PERMISSIONS: 'SET_USER_PERMISSIONS',
-    SET_FORGOT_PASSWORD_EMAIL: 'auth/SET_FORGOT_PASSWORD_EMAIL',
-    SET_FORGOT_PASSWORD_TOKEN: 'auth/SET_FORGOT_PASSWORD_TOKEN',
-  };
-  
-  const initialAuthState = {
-    user: null,
-    authToken: null,
-    error: null,
-    isLoading: false,
-    forgotPassword: { email: '', token: '' },
-  };
-  
-  const AuthState = {
-    user: null,
-    authToken: null,
-    error: null,
-    isLoading: false,
-    forgotPassword: { email: '', token: '' },
-  };
-  
-
 
 // Action creators for login
 
 const loginStarted = () => ({
-    type: AuthActionTypes.LOGIN_STARTED,
+    type: "LOGIN_STARTED",
   });
   
   const loginSuccess = (user, authToken) => ({
-    type: AuthActionTypes.LOGIN_SUCCESS,
+    type: "LOGIN_SUCCESS",
     payload: { user, authToken },
   });
   
   const loginFailure = (error) => ({
-    type: AuthActionTypes.LOGIN_FAILURE,
+    type: "LOGIN_FAILURE",
     payload: { error },
   });
   
   export const login = (username, password) => {
     return async (dispatch) => {
-      dispatch({ type: AuthActionTypes.LOGIN_STARTED });
+      dispatch({ type: "LOGIN_STARTED" });
   
       try {
         // Make API call for user login with username and password
@@ -78,12 +44,12 @@ const loginStarted = () => ({
   
   // Action creators for fetching user details
   export const fetchAuthUserSuccess = (user) => ({
-    type: AuthActionTypes.FETCH_AUTH_USER_SUCCESS,
+    type: "FETCH_AUTH_USER_SUCCESS",
     payload: { user },
   });
   
   const fetchAuthUserFailure = (error) => ({
-    type: AuthActionTypes.FETCH_AUTH_USER_FAILURE,
+    type: "FETCH_AUTH_USER_FAILURE",
     payload: { error },
   });
   
@@ -92,7 +58,7 @@ const loginStarted = () => ({
       dispatch(loginStarted());
       try {
         // Make API call for fetching user details with auth token
-        const response = await fetch('/api/user-details', {
+        const response = await fetch("/account/me/", {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -112,12 +78,12 @@ const loginStarted = () => ({
   };
   
   export const setForgotPasswordEmailAction = (data) => ({
-    type: AuthActionTypes.SET_FORGOT_PASSWORD_EMAIL,
+    type: "auth/SET_FORGOT_PASSWORD_EMAIL",
     payload: data.email,
   });
   
   export const setForgotPasswordTokenAction = (data) => ({
-    type: AuthActionTypes.SET_FORGOT_PASSWORD_TOKEN,
+    type: "auth/SET_FORGOT_PASSWORD_TOKEN",
     payload: data.token,
   });
   

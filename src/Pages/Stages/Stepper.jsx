@@ -11,7 +11,7 @@ import Header from "../../components/header/Header";
 
 
 const customSteps = [
-  { 
+  { id:"1",
     label: "Stage 1",
     component: <Stage1 />,
   },

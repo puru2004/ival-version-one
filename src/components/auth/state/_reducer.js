@@ -40,15 +40,15 @@ const initialAuthState = {
           isLoading: false,
           error: payload.error,
         };
-      case 'SET_FORGOT_PASSWORD_EMAIL':
-        return {
-          ...state,
-          forgotPassword: {
-            ...state.forgotPassword,
-            email: payload
-          }
-        };
-      case 'SET_FORGOT_PASSWORD_TOKEN':
+      // case 'SET_FORGOT_PASSWORD_EMAIL':
+      //   return {
+      //     ...state,
+      //     forgotPassword: {
+      //       ...state.forgotPassword,
+      //       email: payload
+      //     }
+      //   };
+      case "auth/SET_FORGOT_PASSWORD_TOKEN":
         let obj = {
           ...state,
           forgotPassword: {

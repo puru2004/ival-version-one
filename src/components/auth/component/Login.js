@@ -7,7 +7,8 @@ import LocalStorageServices from "../../../services/_localStorageServices";
 import { useAuth } from "../core/Auth";
 import siteConfig from "../../../services/_siteConfig";
 import { useDispatch } from "react-redux";
-import { addUserData } from "../../../state/actions/loginActions";
+import { fetchAuthUserSuccess } from "../state/_action";
+// import { addUserData } from "../../../state/actions/loginActions";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,17 +42,23 @@ const Login = () => {
       setLoading(true);
       try {
         const {
-            data: auth 
+            data: auth
         } = await login(values.email, values.password);
         saveAuth(auth?.access);
+        console.log(auth);
         
         const {
            data: user 
-        } = await getUserByToken(auth?.token);
+        } = await getUserByToken(auth?.access);
+        console.log(auth?.access);
+        console.log(user);
         setCurrentUser(user);
-        console.log(';suer', user);
-        dispatch(addUserData(user));
-        navigate("/stepper");
+        console.log(user.id);
+        if(user?.id){
+          dispatch(fetchAuthUserSuccess(user));
+        }
+        
+       setLoading(false);
       } catch (error) {
         console.error(error);
 

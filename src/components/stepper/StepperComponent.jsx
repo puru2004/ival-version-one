@@ -42,7 +42,7 @@ const StepperComponent = ({ steps }) => {
         ))}
       </div>
       <div className="step-content">
-        {steps[activeStep] ? steps[activeStep].component : "Step not found"}
+        {steps[activeStep] ? steps[activeStep]?.component : "Step not found"}
       </div>
     </div>
   );

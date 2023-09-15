@@ -6,18 +6,32 @@ import {
   useRef,
   Dispatch,
   SetStateAction,
-} from 'react';
+} from "react";
 // import { LayoutSplashScreen } from '../../../../_dcode/layout/core';
 // import { AuthModel, MeUserModel } from './_models';
-import * as authHelper from './AuthHelper';
-import {  getUserByToken } from './_request';
+import * as authHelper from "./AuthHelper";
+import { getUserByToken } from "./_request";
 // import { WithChildren } from '../../../../_dcode/helpers';
 // import { useDispatch } from 'react-redux';
 // import { fetchAuthUserSuccess } from '../state';
 // import { setMiniMasterDataList } from '../../../../store/actions/_commonActions';
-import { apiResponse } from '../../../utils/_gTypes/index';
+import { apiResponse } from "../../../utils/_gTypes/index";
+import { fetchAuthUserSuccess } from "../state/_action";
+import { useDispatch } from "react-redux";
+// import { Logout } from '../component/Logout';
 
-const AuthContext = createContext();
+
+// Define the types
+
+const initAuthContextPropsState = {
+  auth: authHelper.getAuth(),
+  saveAuth: (auth) => {},
+  currentUser: undefined,
+  setCurrentUser: () => {},
+  logout: () => {},
+};
+
+const AuthContext = createContext(initAuthContextPropsState);
 
 const useAuth = () => {
   return useContext(AuthContext);
@@ -38,39 +52,38 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     saveAuth(undefined);
     setCurrentUser(undefined);
-    localStorage.clear(); const logout = () => {
-      saveAuth(undefined);
-      setCurrentUser(undefined);
-      localStorage.clear();
-    };
   };
 
   return (
-    <AuthContext.Provider value={{ auth, saveAuth, currentUser, setCurrentUser, logout }}>
+    <AuthContext.Provider
+      value={{ auth, saveAuth, currentUser, setCurrentUser, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-const AuthInit = ({ children }) => {
-  // const dispatch = useDispatch();
+const AuthInit = () => {
+  const dispatch = useDispatch();
   const { auth, logout, setCurrentUser } = useAuth();
   const didRequest = useRef(false);
-  // const [showSplashScreen, setShowSplashScreen] = useState(true);
-
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+  console.log(auth);
   useEffect(() => {
     const requestUser = async (apiToken) => {
       try {
         if (!didRequest.current) {
-          const { data: { data: user } } = await getUserByToken(apiToken);
+          const {
+            data:  user ,
+          } = await getUserByToken(apiToken);
+          console.log(user);
           if (user) {
             setCurrentUser(user);
           }
 
           if (user?.id) {
-            // dispatch(fetchAuthUserSuccess(user));
+            dispatch(fetchAuthUserSuccess(user));
           }
-
         }
       } catch (error) {
         console.error(error);
@@ -78,18 +91,21 @@ const AuthInit = ({ children }) => {
           logout();
         }
       } finally {
-        // setShowSplashScreen(false);
+        setShowSplashScreen(false);
       }
 
       return () => (didRequest.current = true);
     };
 
-    if (auth && auth.token) {
-      requestUser(auth.token);
+    console.log(auth.access);
+
+    if (auth && auth.access) {
+      requestUser(auth.access);
     } else {
       logout();
-      // setShowSplashScreen(false);
+      setShowSplashScreen(false);
     }
+    // eslint-disable-next-line
   }, []);
 
   return "hello";

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import * as ReactDOM from "react-dom";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
@@ -38,7 +39,12 @@ const datepickerOptions = {
   format: "dd/MM/yyyy", // Customize the date format as needed
 };
 
+
+
 const Stage1 = () => {
+  
+
+
   const handleSubmit = async (dataItem) => {
     const res = await stage1DataRequest(dataItem);
     if (res?.data?.status === ENUM_API_STATUS.ERROR) {
@@ -47,8 +53,8 @@ const Stage1 = () => {
       toastSuccess(res?.data?.message);
     }
   };
-  const data = useSelector((state) => state.login);
-  console.log(data, "redux-check");
+  const user_id = useSelector((state) => state.login?.id);
+  console.log(user_id, "id");
 
   return (
     <Form

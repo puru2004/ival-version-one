@@ -2,9 +2,9 @@
 import siteConfig from "../../../services/_siteConfig";
 import { ENUM_API_STATUS} from "../../../utils/_gConstant/index.js";
 import { handlePostDataFromApi } from "../../../utils/_gFunctions/_handleAPI";
-import { apiResponse } from "../../../utils/_gTypes/index";
 
-const forgetPasswordRequest = async (body, isLoading) => {
+
+export const forgetPasswordRequest = async (body, isLoading) => {
   let res = await handlePostDataFromApi(siteConfig.AUTH + "/forget-password", body, isLoading ? isLoading : undefined);
 
   if (res.data?.status === ENUM_API_STATUS.ERROR) {
@@ -15,7 +15,7 @@ const forgetPasswordRequest = async (body, isLoading) => {
   return res;
 };
 
-const forgetPasswordOTPCheckRequest = async (body, isLoading) => {
+export const forgetPasswordOTPCheckRequest = async (body, isLoading) => {
   let res = await handlePostDataFromApi(siteConfig.AUTH + "/forget-password/otp", body, isLoading ? isLoading : undefined);
 
   if (res.data?.status === ENUM_API_STATUS.ERROR) {
@@ -26,7 +26,7 @@ const forgetPasswordOTPCheckRequest = async (body, isLoading) => {
   return res;
 };
 
-const passwordResetRequest = async (body, isLoading) => {
+export const passwordResetRequest = async (body, isLoading) => {
   let res = await handlePostDataFromApi(siteConfig.AUTH + "/forgot-password/new-password", body, isLoading ? isLoading : undefined);
 
   if (res.data?.status === ENUM_API_STATUS.ERROR) {
@@ -37,8 +37,4 @@ const passwordResetRequest = async (body, isLoading) => {
   return res;
 };
 
-export {
-  forgetPasswordRequest,
-  forgetPasswordOTPCheckRequest,
-  passwordResetRequest
-};
+
