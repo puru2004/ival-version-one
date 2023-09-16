@@ -86,7 +86,7 @@ const HeaderComponent = styled.div`
 
 const Header = () => {
   const user_details = useSelector((state)=>
-    state.login?.data
+    state?.authReducer?.user
   );
   return (
     <HeaderComponent>

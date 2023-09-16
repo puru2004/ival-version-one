@@ -5,14 +5,16 @@ import Singup from '../components/auth/component/Singup';
 import Stepper from '../Pages/Stages/Stepper';
 
 const PrivateRoutes = () => {
-    const { currentUser} = useAuth();
+    const  {currentUser} = useAuth();
+    console.log(currentUser.id);
   return (
     <Routes>
+        <Route path='/login' element={<Navigate to="/stepper"/>}/>
         {currentUser?.id ? (
        
         
             <>
-             <Route path="/*" element={<Stepper/>}/>
+             <Route path="/stepper" element={<Stepper/>}/>
             </>
         ):(
             <>
