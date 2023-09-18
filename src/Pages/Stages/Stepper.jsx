@@ -10,6 +10,7 @@ import Header from "../../components/header/Header";
 
 
 
+
 const customSteps = [
   { id:"1",
     label: "Stage 1",
@@ -35,6 +36,7 @@ const customSteps = [
 
 const Stepper = () => {
   //  const location = useLocation();
+  console.log("hello stepper");
   const [loc, setLoc] = useState(window.location.href.split('/'));
    console.log('location', loc);
 

@@ -8,11 +8,14 @@ import { PublicRoutes } from './PublicRoutes';
 import { App } from '../App';
 import Home from '../Pages/home/Home';
 import "../gobal.css"
+import siteConfig from '../services/_siteConfig';
 
 const {PUBLIC_URL} = process.env;
 
 const AppRoutes = () => {
     const {currentUser} = useAuth();
+    const token = localStorage.getItem(siteConfig.ACCESS_TOKEN);
+    console.log(token,"sgdjsagdjagsd");
     console.log(currentUser)
   return (
     <>

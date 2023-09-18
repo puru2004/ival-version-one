@@ -6,7 +6,7 @@ import Stepper from '../Pages/Stages/Stepper';
 
 const PrivateRoutes = () => {
     const  {currentUser} = useAuth();
-    console.log(currentUser.id);
+    // console.log(currentUser.id);
   return (
     <Routes>
         <Route path='/login' element={<Navigate to="/stepper"/>}/>

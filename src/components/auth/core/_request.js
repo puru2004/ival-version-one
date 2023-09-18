@@ -12,4 +12,17 @@ export async function login(email, password) {
   }
 
 
+  export const  signupRequest = async (body, isLoading) => {
+    try {
+        const res  = await handlePostDataFromApi(siteConfig.SIGNUP, body, isLoading);
+        return res;
+    } catch (error) {
+        // Handle any errors that occur during the API request
+      console.error('Error creating ticket:', error);
+      throw error; // Optional: Rethrow the error to the caller
+    }
+}
+
+
+
   

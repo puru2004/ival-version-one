@@ -71,3 +71,5 @@ export const formValidator = (values) => {
         : "Email is required and should be in a valid format.",
   };
 };
+export const checkboxValidator = (value) =>
+  !value ? "Terms&Conditions checkbox is required" : "";
