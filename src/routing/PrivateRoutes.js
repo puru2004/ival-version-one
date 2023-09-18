@@ -9,7 +9,7 @@ const PrivateRoutes = () => {
     // console.log(currentUser.id);
   return (
     <Routes>
-        <Route path='/login' element={<Navigate to="/stepper"/>}/>
+        <Route path='/signup' element={<Navigate to="/stepper"/>}/>
         {currentUser?.id ? (
        
         

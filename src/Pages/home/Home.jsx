@@ -543,7 +543,7 @@ const Home = () => {
           </li>
         </NavbarMid>
         <NavbarButtonContainer>
-          <NavLink activeClassName="active" to="/login">
+          <NavLink activeClassName="active" to="/signup">
             LogIn
           </NavLink>
           <ButtonComponent className="getstarted-btn">

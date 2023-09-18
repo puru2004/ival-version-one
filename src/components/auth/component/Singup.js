@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import background from "../../../images/signup_background.jpeg";
 import { Button } from "@progress/kendo-react-buttons";
 import * as ReactDOM from "react-dom";
@@ -23,17 +23,28 @@ import {
   arrivalDateValidator,
   checkboxValidator,
 } from "../../forminput/validator";
+import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import { signupRequest } from "../core/_request";
 import { ENUM_API_STATUS } from "../../../utils/_gConstant";
 import { handleAPIErrors } from "../../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../ui-elements/_Toastify";
+import { Dialog } from "@progress/kendo-react-dialogs";
 
 const Singup = () => {
+  const [showDialog , setShowDialog] = useState(false);
+
+  const openDialog = () =>{
+    setShowDialog(true);
+  }
+
+  const closeDialog = () =>{
+    setShowDialog(false);
+  }
   const navigate = useNavigate();
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
+  // const handleLoginClick = () => {
+  //   navigate("/login");
+  // };
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
     if (res?.data?.status === ENUM_API_STATUS.ERROR) {
@@ -86,10 +97,17 @@ const Singup = () => {
                   border: "none",
                   color: "white",
                 }}
-                onClick={handleLoginClick}
+                onClick={openDialog}
               >
                 Login
               </Button>
+              {showDialog && (
+                <Dialog
+                onClose={closeDialog} >
+                <Login/>
+              </Dialog>
+              )}
+              
             </div>
           </div>
           <div

@@ -9,6 +9,7 @@ import siteConfig from "../../../services/_siteConfig";
 import { useDispatch } from "react-redux";
 import { fetchAuthUserSuccess } from "../state/_action";
 // import { addUserData } from "../../../state/actions/loginActions";
+import login_img from "../../../images/Rectangle 79.png";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,24 +42,20 @@ const Login = () => {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true);
       try {
-        const {
-            data: auth
-        } = await login(values.email, values.password);
+        const { data: auth } = await login(values.email, values.password);
         saveAuth(auth?.access);
         console.log(auth);
-        
-        const {
-           data: user 
-        } = await getUserByToken(auth?.access);
+
+        const { data: user } = await getUserByToken(auth?.access);
         console.log(auth?.access);
         console.log(user);
         setCurrentUser(user);
         console.log(user.id);
-        if(user?.id){
+        if (user?.id) {
           dispatch(fetchAuthUserSuccess(user));
         }
-        
-       setLoading(false);
+
+        setLoading(false);
       } catch (error) {
         console.error(error);
 
@@ -76,51 +73,138 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="form-control"
-            placeholder="Enter your email"
-            {...formik.getFieldProps("email")}
-          />
-          {formik.touched.email && formik.errors.email && (
-            <div className="error">{formik.errors.email}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            className="form-control"
-            placeholder="Enter your password"
-            {...formik.getFieldProps("password")}
-          />
-          <button
-            type="button"
-            className="show-password-button"
-            onClick={handleTogglePassword}
-          >
-            {showPassword ? "Hide" : "Show"}
-          </button>
-          {formik.touched.password && formik.errors.password && (
-            <div className="error">{formik.errors.password}</div>
-          )}
-        </div>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? "Logging In..." : "Login"}
-        </button>
-      </form>
-      <div className="forgot-password">
-        <Link to="/forgot-password">Forgot Password?</Link>
+    <>
+      <div style={{ width: "100%" }}>
+        <img src={login_img} style={{ width: "100%" }} />
       </div>
-    </div>
+      <div
+        className="login-container"
+        style={{ marginTop: "2rem", marginLeft: "2rem", marginRight: "2rem" }}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <label
+            style={{
+              fontWeight: "600",
+              fontSize: "14px",
+              lineHeight: "19.6px",
+            }}
+          >
+            Email
+          </label>
+          <div
+            className="form-group"
+            style={{ width: "100%", marginTop: "3px" }}
+          >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="form-control"
+              placeholder="Enter your email"
+              {...formik.getFieldProps("email")}
+              style={{
+                height: "48px",
+                width: "100%",
+                marginBottom: "15px",
+                marginLeft: "",
+                border: "1px solid #CED4DA",
+                background: "#F9F9F9",
+                padding: "10px",
+              }}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <div className="error" style={{color:"red"}}>{formik.errors.email}</div>
+            )}
+          </div>
+          <label
+            style={{
+              fontWeight: "600",
+              fontSize: "14px",
+              lineHeight: "19.6px",
+            }}
+          >
+            Password
+          </label>
+          <div
+            className="form-group"
+            style={{ width: "100%", marginTop: "3px" }}
+          >
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              className="form-control"
+              placeholder="Enter your password"
+              {...formik.getFieldProps("password")}
+              style={{
+                height: "48px",
+                width: "100%",
+                marginBottom: "15px",
+                marginLeft: "",
+                border: "1px solid #CED4DA",
+                background: "#F9F9F9",
+                padding: "10px",
+              }}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <div className="error" style={{color:"red"}}>{formik.errors.password}</div>
+            )}
+            <div
+              className="forgot-password"
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "1rem",
+              }}
+            >
+              <Link
+                to="/forgot-password"
+                style={{
+                  color: "#F09021",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                }}
+              >
+                Forgot Password ?
+              </Link>
+            </div>
+            
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+            style={{
+              width: "100%",
+              height: "50px",
+              background: "#F09021",
+              border: "none",
+              color: "white",
+              marginTop: "5px",
+              marginBottom: "20px",
+              fontWeight: "700",
+              fontSize: "18px",
+            }}
+          >
+            {loading ? "Signing In..." : "Sign In"}
+          </button>
+        </form>
+      </div>
+      <div
+        style={{
+          marginRight: "7rem",
+          marginLeft: "7rem",
+          fontWeight: "500",
+          fontSize: "16px",
+        }}
+      >
+        Don’t have an account ?
+        <span style={{ color: "#F09021", marginLeft: "10px" }}>
+          Register Now
+        </span>
+      </div>
+    </>
   );
 };
 

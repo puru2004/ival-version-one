@@ -8,7 +8,7 @@ const PublicRoutes = () => {
   return (
     <Routes>
         
-    <Route path='/login' element={<Login/>}/>
+    {/* <Route path='/login' element={<Login/>}/> */}
     <Route index element={<Home/>}/>
     <Route path='/signup' element={<Singup/>}/>
     </Routes>
