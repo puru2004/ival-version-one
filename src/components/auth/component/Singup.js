@@ -30,6 +30,7 @@ import { ENUM_API_STATUS } from "../../../utils/_gConstant";
 import { handleAPIErrors } from "../../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../ui-elements/_Toastify";
 import { Dialog } from "@progress/kendo-react-dialogs";
+import "./Signup.css"
 
 const Singup = () => {
   const [showDialog , setShowDialog] = useState(false);
@@ -45,13 +46,19 @@ const Singup = () => {
   // const handleLoginClick = () => {
   //   navigate("/login");
   // };
+  const clearData = () =>{
+    
+  }
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
-    if (res?.data?.status === ENUM_API_STATUS.ERROR) {
-      handleAPIErrors(res?.data);
+    console.log(res?.status);
+    if (res?.status === 201) {
+      openDialog();
+      handleAPIErrors(res?.Status);
     } else {
-      toastSuccess(res?.data?.message);
+      toastSuccess(res?.status);
     }
+
   };
   return (
     <>
@@ -175,7 +182,7 @@ const Singup = () => {
                       name={"name"}
                       component={FormInput}
                       // validator={nameValidator}
-                      style={{ height: "48px", marginBottom: "1rem" }}
+                      style={{ height: "48px", marginBottom: "1rem"}}
                     />
 
                     <label
@@ -193,7 +200,7 @@ const Singup = () => {
                       name={"email"}
                       type={"email"}
                       component={FormInput}
-                      validator={emailValidator}
+                      // validator={emailValidator}
                       style={{ height: "48px", marginBottom: "1rem" }}
                     />
                     <div
@@ -215,8 +222,8 @@ const Singup = () => {
                           Create Password
                         </label>
                         <Field
-                          id={"createPassowrd"}
-                          name={"createPassowrd"}
+                          id={"create_password"}
+                          name={"password"}
                           // label={"Create Passowrd"}
                           component={FormInput}
                           // validator={nameValidator}
@@ -236,7 +243,7 @@ const Singup = () => {
                         </label>
                         <Field
                           id={"confirmPassword"}
-                          name={"confirmPassword"}
+                          name={"confirm_password"}
                           component={FormInput}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
@@ -263,7 +270,7 @@ const Singup = () => {
                         </label>
                         <Field
                           id={"phoneNumber"}
-                          name={"phoneNumber"}
+                          name={"mobile"}
                           mask={"(999) 000-00-00-00"}
                           component={FormMaskedTextBox}
                           validator={phoneValidator}
@@ -283,7 +290,7 @@ const Singup = () => {
                         </label>
                         <Field
                           id={"jobTitle"}
-                          name={"jobTitle"}
+                          name={"job_title"}
                           component={FormInput}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
@@ -309,8 +316,8 @@ const Singup = () => {
                           Developer Name
                         </label>
                         <Field
-                          id={"developer_Name"}
-                          name={"developer_Name"}
+                          id={"developerName"}
+                          name={"developer_name"}
                           component={FormInput}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
@@ -350,13 +357,14 @@ const Singup = () => {
                       <Button
                         themeColor={"orange"}
                         type={"submit"}
-                        disabled={!formRenderProps.allowSubmit}
+                        disabled={!formRenderProps.onFormReset}
                         style={{
                           width: "100%",
                           height: "50px",
                           background: "#F09021",
                           border: "none",
                           color: "white",
+                          
                         }}
                       >
                         Register you account

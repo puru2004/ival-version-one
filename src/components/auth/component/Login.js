@@ -10,6 +10,10 @@ import { useDispatch } from "react-redux";
 import { fetchAuthUserSuccess } from "../state/_action";
 // import { addUserData } from "../../../state/actions/loginActions";
 import login_img from "../../../images/Rectangle 79.png";
+import { Dialog } from "@progress/kendo-react-dialogs";
+import ForgotPassword from "./ForgotPassword";
+
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,7 +38,15 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showDialog , setShowDialog] = useState(false);
   const { saveAuth, setCurrentUser } = useAuth();
+  const openDialog = () =>{
+    setShowDialog(true);
+  }
+  
+  const closeDialog = () =>{
+    setShowDialog(false);
+  }
 
   const formik = useFormik({
     initialValues,
@@ -156,8 +168,9 @@ const Login = () => {
                 justifyContent: "flex-end",
                 marginTop: "1rem",
               }}
+              onClick={openDialog}
             >
-              <Link
+              <div
                 to="/forgot-password"
                 style={{
                   color: "#F09021",
@@ -166,8 +179,14 @@ const Login = () => {
                 }}
               >
                 Forgot Password ?
-              </Link>
+              </div>
             </div>
+            {showDialog && (
+                <Dialog
+                onClose={closeDialog} >
+                <ForgotPassword/>
+              </Dialog>
+              )}
             
           </div>
 
