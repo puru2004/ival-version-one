@@ -1,7 +1,12 @@
 import React from 'react'
-import sent_icon from "../../icons/sent.svg"
+import sent_icon from "../../icons/sent.svg";
+import { useSelector } from 'react-redux';
 
-const verifyEmail = () => {
+
+const EmailSentVerification = () => {
+const forgot_mail = useSelector((state) => state.authReducer.forgotPassword?.email);
+console.log(forgot_mail)
+  
   return (
     <>
     <div style={{ width: "100%" }}>
@@ -16,7 +21,7 @@ const verifyEmail = () => {
           marginTop: "10px",
         }}
       >
-        Verifying Your Account
+        Mail sent successfully !
       </div>
       <div
         style={{
@@ -29,9 +34,10 @@ const verifyEmail = () => {
           marginBottom: "20px",
         }}
       >
-        Lorem ipsum dolor sit amet consectetur. Sociis sed <br /> at imperdiet
-        quam. Id molestie gravida etiam nisi
-        <br /> suscipit leo nulla id scelerisque.
+        Instruction to rest password have been sent to 
+      </div>
+      <div style={{textAlign:"center", color:"#F09021", fontWeight:"500"}}>
+      {forgot_mail}
       </div>
       <button
         type="submit"
@@ -42,17 +48,21 @@ const verifyEmail = () => {
           background: "#F09021",
           border: "none",
           color: "white",
-          marginTop: "5px",
+          marginTop: "20px",
           marginBottom: "20px",
           fontWeight: "700",
           fontSize: "18px",
         }}
       >
-        Okay, Got It
+       Back to Login
       </button>
+
+      <div style={{textAlign:"center", fontWeight:"700", fontSize:"18px",marginTop:"7px"}}>
+      Haven’t received yet ? Send it again !
+      </div>
     </div>
     </>
   )
 }
 
-export default verifyEmail
+export default EmailSentVerification

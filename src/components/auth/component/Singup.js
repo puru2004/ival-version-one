@@ -30,6 +30,7 @@ import { ENUM_API_STATUS } from "../../../utils/_gConstant";
 import { handleAPIErrors } from "../../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../ui-elements/_Toastify";
 import { Dialog } from "@progress/kendo-react-dialogs";
+import verifyEmail from "../../../Pages/modals/verifyEmail"
 import "./Signup.css"
 
 const Singup = () => {
@@ -52,8 +53,8 @@ const Singup = () => {
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
     console.log(res?.status);
+    openDialog();
     if (res?.status === 201) {
-      openDialog();
       handleAPIErrors(res?.Status);
     } else {
       toastSuccess(res?.status);

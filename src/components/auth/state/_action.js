@@ -77,13 +77,18 @@ const loginStarted = () => ({
     };
   };
   
-  export const setForgotPasswordEmailAction = (data) => ({
-    type: "auth/SET_FORGOT_PASSWORD_EMAIL",
-    payload: data.email,
-  });
+  export const setForgotPasswordEmailAction = (data) => {
+   return { type: "auth/SET_FORGOT_PASSWORD_EMAIL",
+    payload: data.email}
+  };
   
-  export const setForgotPasswordTokenAction = (data) => ({
-    type: "auth/SET_FORGOT_PASSWORD_TOKEN",
-    payload: data.token,
-  });
+  // export const setForgotPasswordTokenAction = (data) => ({
+  //   type: "auth/SET_FORGOT_PASSWORD_TOKEN",
+  //   payload: data.token,
+  // });
+
+
+  // export const setForgotPasswordEmailAction = (data: { email: string }) => {
+  //   return { type: AuthActionTypes.SET_FORGOT_PASSWORD_EMAIL, payload: data.email }
+  // }
   

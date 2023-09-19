@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import lockImage from "../../../icons/lock_icon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setForgotPasswordEmailAction } from "../state/_action";
+import { Dialog } from "@progress/kendo-react-dialogs";
+import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -15,11 +20,24 @@ const initialValues = {
 };
 
 const ForgotPassword = () => {
+  const [showDialog , setShowDialog] = useState(false);
+
+  const openDialog = () =>{
+    setShowDialog(true);
+  }
+  
+  const closeDialog = () =>{
+    setShowDialog(false);
+  }
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues,
     
     onSubmit: async(values,{setStatus, setSubmitting})=>{
-        console.log(values);
+      dispatch(setForgotPasswordEmailAction(values))
+
+        console.log(values?.email);
+        openDialog();
     }
   });
   return (
@@ -100,8 +118,15 @@ const ForgotPassword = () => {
           >
             {"Submit"}
           </button>
+          
         </div>
       </form>
+      {showDialog && (
+                <Dialog
+                onClose={closeDialog} >
+                <EmailSentVerification/>
+              </Dialog>
+              )}
     </div>
   );
 };
