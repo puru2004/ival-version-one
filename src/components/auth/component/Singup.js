@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import background from "../../../images/signup_background.jpeg";
 import { Button } from "@progress/kendo-react-buttons";
 import * as ReactDOM from "react-dom";
@@ -32,28 +32,28 @@ import { toastSuccess } from "../../ui-elements/_Toastify";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import verifyEmail from "../../../Pages/modals/verifyEmail"
 import "./Signup.css"
+import { useDispatch, useSelector } from "react-redux";
+import { loginModalAction } from "../../../state/commonActions/_commonActions";
 
 const Singup = () => {
+  const dispatch = useDispatch();
+  const g_loginModalState = useSelector((state) =>state?.modalReducer?.loginModal);
+  console.log(g_loginModalState,"modal state");
   const [showDialog , setShowDialog] = useState(false);
-
-  const openDialog = () =>{
-    setShowDialog(true);
+  
+  const toggleDialog = () =>{
+    setShowDialog(!showDialog);
+  };
+  const modalOpen = () =>{
+    // dispatch(loginModalAction("false"));
+    toggleDialog();
   }
-
-  const closeDialog = () =>{
-    setShowDialog(false);
-  }
-  const navigate = useNavigate();
-  // const handleLoginClick = () => {
-  //   navigate("/login");
-  // };
-  const clearData = () =>{
-    
-  }
+  
+  
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
     console.log(res?.status);
-    openDialog();
+    toggleDialog();
     if (res?.status === 201) {
       handleAPIErrors(res?.Status);
     } else {
@@ -105,13 +105,12 @@ const Singup = () => {
                   border: "none",
                   color: "white",
                 }}
-                onClick={openDialog}
+                onClick={modalOpen}
               >
                 Login
               </Button>
               {showDialog && (
-                <Dialog
-                onClose={closeDialog} >
+                <Dialog >
                 <Login/>
               </Dialog>
               )}

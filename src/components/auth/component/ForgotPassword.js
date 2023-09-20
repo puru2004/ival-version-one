@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setForgotPasswordEmailAction } from "../state/_action";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
+import { loginModalAction } from "../../../state/commonActions/_commonActions";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,15 +22,13 @@ const initialValues = {
 
 const ForgotPassword = () => {
   const [showDialog , setShowDialog] = useState(false);
-
-  const openDialog = () =>{
-    setShowDialog(true);
-  }
-  
-  const closeDialog = () =>{
-    setShowDialog(false);
-  }
   const dispatch = useDispatch()
+
+ const toggleDialog = () =>{
+  dispatch(loginModalAction(false));
+  setShowDialog(!showDialog);
+ }
+  
   const formik = useFormik({
     initialValues,
     
@@ -37,7 +36,7 @@ const ForgotPassword = () => {
       dispatch(setForgotPasswordEmailAction(values))
 
         console.log(values?.email);
-        openDialog();
+        toggleDialog();
     }
   });
   return (
@@ -122,8 +121,7 @@ const ForgotPassword = () => {
         </div>
       </form>
       {showDialog && (
-                <Dialog
-                onClose={closeDialog} >
+                <Dialog>
                 <EmailSentVerification/>
               </Dialog>
               )}

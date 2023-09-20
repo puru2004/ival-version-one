@@ -5,12 +5,14 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import { rootReducer } from "./reducer";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import authReducer from "../components/auth/state/_reducer";
 
 const middleware = [thunk];
 
 
 const persistConfig = {
-    key:rootReducer, // key for the objeect in the storage
+    key: rootReducer, // key for the objeect in the storage
+    whitelist:["authReducer"],
     storage, // storage engine to use for the persisting data
 };
 

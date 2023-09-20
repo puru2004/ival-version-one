@@ -12,6 +12,7 @@ import { fetchAuthUserSuccess } from "../state/_action";
 import login_img from "../../../images/Rectangle 79.png";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import ForgotPassword from "./ForgotPassword";
+import { loginModalAction } from "../../../state/commonActions/_commonActions";
 
 
 
@@ -40,12 +41,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showDialog , setShowDialog] = useState(false);
   const { saveAuth, setCurrentUser } = useAuth();
-  const openDialog = () =>{
-    setShowDialog(true);
-  }
-  
-  const closeDialog = () =>{
-    setShowDialog(false);
+  const toggleDialog = () =>{
+    setShowDialog(!showDialog);
   }
 
   const formik = useFormik({
@@ -62,7 +59,7 @@ const Login = () => {
         console.log(auth?.access);
         console.log(user);
         setCurrentUser(user);
-        console.log(user.id);
+        
         if (user?.id) {
           dispatch(fetchAuthUserSuccess(user));
         }
@@ -168,7 +165,7 @@ const Login = () => {
                 justifyContent: "flex-end",
                 marginTop: "1rem",
               }}
-              onClick={openDialog}
+              onClick={toggleDialog}
             >
               <div
                 to="/forgot-password"
@@ -182,8 +179,7 @@ const Login = () => {
               </div>
             </div>
             {showDialog && (
-                <Dialog
-                onClose={closeDialog} >
+                <Dialog>
                 <ForgotPassword/>
               </Dialog>
               )}
