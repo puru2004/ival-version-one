@@ -3,9 +3,13 @@ import sent_icon from "../../icons/sent.svg";
 import { useSelector } from 'react-redux';
 
 
-const EmailSentVerification = () => {
+const EmailSentVerification = ({setShowEmailVerification ,setShowLogin }) => {
 const forgot_mail = useSelector((state) => state.authReducer.forgotPassword?.email);
 console.log(forgot_mail)
+const toggleDialog = () =>{
+  setShowLogin(true);
+  setShowEmailVerification(false);
+}
   
   return (
     <>
@@ -53,6 +57,7 @@ console.log(forgot_mail)
           fontWeight: "700",
           fontSize: "18px",
         }}
+        onClick={toggleDialog}
       >
        Back to Login
       </button>

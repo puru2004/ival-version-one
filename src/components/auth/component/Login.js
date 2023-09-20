@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -6,15 +6,16 @@ import { login, getUserByToken } from "../core/_request";
 import LocalStorageServices from "../../../services/_localStorageServices";
 import { useAuth } from "../core/Auth";
 import siteConfig from "../../../services/_siteConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUserSuccess } from "../state/_action";
 // import { addUserData } from "../../../state/actions/loginActions";
 import login_img from "../../../images/Rectangle 79.png";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import ForgotPassword from "./ForgotPassword";
-import { loginModalAction } from "../../../state/commonActions/_commonActions";
-
-
+import {
+  loginModalAction,
+  forgotPasswordModalAction,
+} from "../../../state/commonActions/_commonActions";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,17 +34,22 @@ const initialValues = {
   password: "",
 };
 
-const Login = () => {
+const Login = ({setShowForgotPassword,setShowLogin}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showDialog , setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const { saveAuth, setCurrentUser } = useAuth();
-  const toggleDialog = () =>{
-    setShowDialog(!showDialog);
-  }
+  const fPass = useSelector(
+    (state) => state?.modalReducer?.isForgotPasswordModal
+  );
+
+ const toggleDialog = () =>{
+  setShowForgotPassword(true)
+  setShowLogin(false)
+ }
 
   const formik = useFormik({
     initialValues,
@@ -59,7 +65,7 @@ const Login = () => {
         console.log(auth?.access);
         console.log(user);
         setCurrentUser(user);
-        
+
         if (user?.id) {
           dispatch(fetchAuthUserSuccess(user));
         }
@@ -80,6 +86,11 @@ const Login = () => {
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
+  const handleRegisterClick = () => {
+    navigate("/signup");
+    setShowLogin(false);
+  }
 
   return (
     <>
@@ -122,7 +133,9 @@ const Login = () => {
               }}
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="error" style={{color:"red"}}>{formik.errors.email}</div>
+              <div className="error" style={{ color: "red" }}>
+                {formik.errors.email}
+              </div>
             )}
           </div>
           <label
@@ -156,7 +169,9 @@ const Login = () => {
               }}
             />
             {formik.touched.password && formik.errors.password && (
-              <div className="error" style={{color:"red"}}>{formik.errors.password}</div>
+              <div className="error" style={{ color: "red" }}>
+                {formik.errors.password}
+              </div>
             )}
             <div
               className="forgot-password"
@@ -178,12 +193,7 @@ const Login = () => {
                 Forgot Password ?
               </div>
             </div>
-            {showDialog && (
-                <Dialog>
-                <ForgotPassword/>
-              </Dialog>
-              )}
-            
+
           </div>
 
           <button
@@ -215,7 +225,8 @@ const Login = () => {
         }}
       >
         Don’t have an account ?
-        <span style={{ color: "#F09021", marginLeft: "10px" }}>
+        <span style={{ color: "#F09021", marginLeft: "10px" }}
+        onClick={handleRegisterClick}>
           Register Now
         </span>
       </div>

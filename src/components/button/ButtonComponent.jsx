@@ -13,10 +13,10 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const KendoButton = ({ className, style, children }) => {
+const KendoButton = ({ className, style, children, onClick }) => {
   return (
     <ButtonContainer>
-      <Button className={`custom-button ${className}`} style={style}>
+      <Button className={`custom-button ${className}`} style={style} onClick={onClick}>
         {children}
       </Button>
     </ButtonContainer>
@@ -27,6 +27,7 @@ KendoButton.propTypes = {
   className: PropTypes.string, // Additional CSS classes
   style: PropTypes.object, // Inline styles
   children: PropTypes.node, // Button content
+  onClick: PropTypes.func,// function calling
 };
 
 export default KendoButton;

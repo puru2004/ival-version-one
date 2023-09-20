@@ -20,13 +20,14 @@ const initialValues = {
   email: "",
 };
 
-const ForgotPassword = () => {
+  const ForgotPassword = ({setShowEmailVerification,setShowForgotPassword}) => {
   const [showDialog , setShowDialog] = useState(false);
   const dispatch = useDispatch()
 
  const toggleDialog = () =>{
-  dispatch(loginModalAction(false));
-  setShowDialog(!showDialog);
+  setShowEmailVerification(true)
+  setShowForgotPassword(false);
+  
  }
   
   const formik = useFormik({

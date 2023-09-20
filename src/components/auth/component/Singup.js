@@ -34,20 +34,22 @@ import verifyEmail from "../../../Pages/modals/verifyEmail"
 import "./Signup.css"
 import { useDispatch, useSelector } from "react-redux";
 import { loginModalAction } from "../../../state/commonActions/_commonActions";
+import ForgotPassword from "./ForgotPassword";
+import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
 
 const Singup = () => {
   const dispatch = useDispatch();
-  const g_loginModalState = useSelector((state) =>state?.modalReducer?.loginModal);
+  const g_loginModalState = useSelector((state) =>state?.modalReducer?.isLoginModal);
   console.log(g_loginModalState,"modal state");
   const [showDialog , setShowDialog] = useState(false);
-  
+  const [showForgotPassword,setShowForgotPassword] = useState(false)
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+   
+
   const toggleDialog = () =>{
-    setShowDialog(!showDialog);
+    setShowDialog(true);
   };
-  const modalOpen = () =>{
-    // dispatch(loginModalAction("false"));
-    toggleDialog();
-  }
+
   
   
   const handleSubmit = async (dataItem) => {
@@ -105,16 +107,26 @@ const Singup = () => {
                   border: "none",
                   color: "white",
                 }}
-                onClick={modalOpen}
+                onClick={toggleDialog}
               >
                 Login
               </Button>
               {showDialog && (
                 <Dialog >
-                <Login/>
+                <Login setShowForgotPassword={setShowForgotPassword} setShowLogin ={setShowDialog}/>
               </Dialog>
               )}
               
+              {showForgotPassword && (
+              <Dialog>
+                <ForgotPassword setShowEmailVerification={setShowEmailVerification} setShowForgotPassword={setShowForgotPassword}/>
+              </Dialog>
+            )}
+            {showEmailVerification && (
+              <Dialog>
+                <EmailSentVerification setShowEmailVerification = {setShowEmailVerification} setShowLogin={setShowDialog}/>
+              </Dialog>
+            )}
             </div>
           </div>
           <div

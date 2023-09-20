@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Accordion from "../../components/accordion/Accordion";
 import Footer from "../../components/footer/Footer";
@@ -21,11 +21,15 @@ import hyde from "../../icons/hyde.svg";
 import orbit from "../../icons/orbit.svg";
 import sage from "../../icons/sage.svg";
 import mixed_tenure from "../../icons/mixed_tenure.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SliderComponent from "../../components/slider/Slider";
 
 import ReactPlayer from "react-player";
 import ButtonComponent from "../../components/button/ButtonComponent";
+import { Dialog } from "@progress/kendo-react-dialogs";
+import Login from "../../components/auth/component/Login";
+import ForgotPassword from "../../components/auth/component/ForgotPassword";
+import EmailSentVerification from "../modals/EmailSentVerification";
 
 // media queries for different screen sizes
 const mediaQueries = {
@@ -514,6 +518,18 @@ const VIDEO_PATH = "https://youtu.be/0BIaDVnYp2A";
 
 const Home = () => {
   const playerRef = useRef(null);
+  const [showDialog , setShowDialog] = useState(false);
+  const [showForgotPassword,setShowForgotPassword] = useState(false)
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+   
+
+  const toggleDialog=()=>{
+    setShowDialog(true);
+  }
+  const navigate = useNavigate();
+  const handleGetStarted = () =>{
+    navigate("/signup");
+  }
   return (
     <>
       <Navbar>
@@ -543,10 +559,10 @@ const Home = () => {
           </li>
         </NavbarMid>
         <NavbarButtonContainer>
-          <NavLink activeClassName="active" to="/signup">
+          <NavLink activeClassName="active" onClick={toggleDialog}>
             LogIn
           </NavLink>
-          <ButtonComponent className="getstarted-btn">
+          <ButtonComponent className="getstarted-btn" onClick={handleGetStarted}>
             get started
           </ButtonComponent>
         </NavbarButtonContainer>
@@ -820,6 +836,22 @@ const Home = () => {
       <Accordion />
 
       <Footer />
+      {showDialog && (
+                <Dialog >
+                <Login setShowForgotPassword={setShowForgotPassword} setShowLogin ={setShowDialog}/>
+              </Dialog>
+              )}
+              
+              {showForgotPassword && (
+              <Dialog>
+                <ForgotPassword setShowEmailVerification={setShowEmailVerification} setShowForgotPassword={setShowForgotPassword}/>
+              </Dialog>
+            )}
+            {showEmailVerification && (
+              <Dialog>
+                <EmailSentVerification setShowEmailVerification = {setShowEmailVerification} setShowLogin={setShowDialog}/>
+              </Dialog>
+            )}
     </>
   );
 };
