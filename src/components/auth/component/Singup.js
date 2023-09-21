@@ -36,6 +36,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginModalAction } from "../../../state/commonActions/_commonActions";
 import ForgotPassword from "./ForgotPassword";
 import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
+import SwiperComponent from "../../swiper/SwiperComponent";
 
 const Singup = () => {
   const dispatch = useDispatch();
@@ -68,17 +69,13 @@ const Singup = () => {
       <div style={{ display: "flex", width: "100%", height: "930px" }}>
         <div
           style={{
-            width: "50%",
-            backgroundImage: "../../../images/signup_background.jpeg",
+            width: "45%",
             height: "100%",
           }}
         >
-          <img
-            src={background}
-            style={{ width: "100%", height: "930px" }}
-          ></img>
+          <SwiperComponent/>
         </div>
-        <div style={{ width: "50%", marginTop: "2rem" }}>
+        <div style={{ width: "55%", marginTop: "2rem" }}>
           <div
             style={{
               display: "flex",
