@@ -190,6 +190,7 @@ const Singup = () => {
                       id={"name"}
                       name={"name"}
                       component={FormInput}
+                      placeHolder={"Enter your full name"}
                       // validator={nameValidator}
                       style={{ height: "48px", marginBottom: "1rem"}}
                     />
@@ -209,8 +210,10 @@ const Singup = () => {
                       name={"email"}
                       type={"email"}
                       component={FormInput}
+                      placeHolder={"Enter your email address"}
                       // validator={emailValidator}
-                      style={{ height: "48px", marginBottom: "1rem" }}
+                      style={{ height: "48px", marginBottom: "1rem",borderTopColor:"#ffffff !important" }}
+                      className="emaildiv"
                     />
                     <div
                       style={{
@@ -234,6 +237,7 @@ const Singup = () => {
                           id={"create_password"}
                           name={"password"}
                           // label={"Create Passowrd"}
+                          placeHolder={"create new password"}
                           component={FormInput}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
@@ -254,6 +258,7 @@ const Singup = () => {
                           id={"confirmPassword"}
                           name={"confirm_password"}
                           component={FormInput}
+                          placeHolder={"confirm your password"}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
                         />
@@ -283,6 +288,7 @@ const Singup = () => {
                           mask={"(999) 000-00-00-00"}
                           component={FormMaskedTextBox}
                           validator={phoneValidator}
+                          placeHolder={"0000000000"}
                           style={{ height: "48px", marginBottom: "1rem" }}
                         />
                       </div>
@@ -301,6 +307,7 @@ const Singup = () => {
                           id={"jobTitle"}
                           name={"job_title"}
                           component={FormInput}
+                          placeHolder={"Enter your job title"}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
                         />
@@ -328,6 +335,7 @@ const Singup = () => {
                           id={"developerName"}
                           name={"developer_name"}
                           component={FormInput}
+                          placeHolder={"Enter your developer name"}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
                         />
@@ -347,6 +355,7 @@ const Singup = () => {
                           id={"region"}
                           name={"region"}
                           component={FormInput}
+                          placeHolder={"Enter your region"}
                           // validator={nameValidator}
                           style={{ height: "48px", marginBottom: "1rem" }}
                         />
@@ -360,6 +369,7 @@ const Singup = () => {
                         component={FormCheckbox}
                         validator={checkboxValidator}
                         kendo-checkbox-border={"#F09021"}
+                        size={"lg"}
                       />
                     </div>
                     <div className="k-form-buttons" style={{ width: "100%" }}>

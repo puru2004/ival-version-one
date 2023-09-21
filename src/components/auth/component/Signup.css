@@ -1,3 +1,21 @@
-.k-input-solid , .k-picker-solid {
-    border-top-color: "1px solid grey" !important;
+.k-input-solid {
+    border-color: #CED4DA !important;
+    background-color: #F9F9F9 !important;
+    border-radius: 0px !important;
+}
+
+.k-checkbox:checked{
+    background-color: #00BA88 !important;
+    border-color: #00BA88 !important;
+    color: white;
+}
+
+.k-checkbox{
+    background-color: #F9F9F9 !important;
+}
+
+.k-checkbox-lg {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 0px !important;
 }
