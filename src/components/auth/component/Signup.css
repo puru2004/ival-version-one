@@ -19,3 +19,22 @@
     height: 28px !important;
     border-radius: 0px !important;
 }
+
+.k-window-content {
+    padding-block: 0px !important;
+    padding-inline: 0px !important;
+}
+
+
+.k-window-content:last-child {
+    padding-bottom: clamp(0px, 0px, 0px) !important;
+}
+.k-window-content:first-child {
+    padding-bottom: clamp(0px, 0px, 0px) !important;
+}
+.k-window-content:last-child {
+    padding-bottom: clamp(0px, 0px, 0px) !important;
+}
+.k-window-content:first-child {
+    padding-bottom: clamp(0px, 0px, 0px) !important;
+}

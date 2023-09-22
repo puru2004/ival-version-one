@@ -15,6 +15,7 @@ const PublicRoutes = () => {
       <Route path="/signup" element={<Singup />} />
       <Route path="/forgot" element={<ForgotPassword />} />
       <Route path="/swiper" element={<SwiperComponent/>} />
+      <Route path="/login" element={<Login/>}/>
     </Routes>
   );
 };

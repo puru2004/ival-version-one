@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import background from "../../../images/signup_background.jpeg";
+// import background from "../../../images/signup_background.jpeg";
 import { Button } from "@progress/kendo-react-buttons";
 import * as ReactDOM from "react-dom";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";

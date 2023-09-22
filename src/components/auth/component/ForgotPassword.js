@@ -20,29 +20,34 @@ const initialValues = {
   email: "",
 };
 
-  const ForgotPassword = ({setShowEmailVerification,setShowForgotPassword}) => {
-  const [showDialog , setShowDialog] = useState(false);
-  const dispatch = useDispatch()
+const ForgotPassword = ({
+  setShowEmailVerification,
+  setShowForgotPassword,
+}) => {
+  const [showDialog, setShowDialog] = useState(false);
+  const dispatch = useDispatch();
 
- const toggleDialog = () =>{
-  setShowEmailVerification(true)
-  setShowForgotPassword(false);
-  
- }
-  
+  const toggleDialog = () => {
+    setShowEmailVerification(true);
+    setShowForgotPassword(false);
+  };
+
   const formik = useFormik({
     initialValues,
-    
-    onSubmit: async(values,{setStatus, setSubmitting})=>{
-      dispatch(setForgotPasswordEmailAction(values))
 
-        console.log(values?.email);
-        toggleDialog();
-    }
+    onSubmit: async (values, { setStatus, setSubmitting }) => {
+      dispatch(setForgotPasswordEmailAction(values));
+
+      console.log(values?.email);
+      toggleDialog();
+    },
   });
   return (
-    <div style={{ width: "100%" }}>
-      <img src={lockImage} style={{ marginLeft: "40%", marginTop: "3%" }} />
+    <div style={{ margin: "32px" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img src={lockImage} style={{}} />
+      </div>
+
       <div
         style={{
           fontFamily: "Figtree",
@@ -50,7 +55,7 @@ const initialValues = {
           fontSize: "24px",
           color: "#1B3F58",
           textAlign: "center",
-          marginTop: "10px",
+          marginTop: "24px",
         }}
       >
         Forget your password?
@@ -63,7 +68,7 @@ const initialValues = {
           fontSize: "16px",
           color: "#556877",
           marginTop: "10px",
-          marginBottom: "20px",
+          marginBottom: "24px",
         }}
       >
         Enter the email you signed up with wait for your <br /> recovery details
@@ -79,18 +84,18 @@ const initialValues = {
         >
           Email
         </label>
-        <div className="form-group" style={{ width: "100%", marginTop: "3px" }}>
+        <div className="form-group" style={{ marginTop: "3px" }}>
           <input
             type="email"
             id="email"
             name="email"
             className="form-control"
             placeholder="Enter your email"
-              {...formik.getFieldProps("email")}
+            {...formik.getFieldProps("email")}
             style={{
               height: "48px",
               width: "100%",
-              marginBottom: "15px",
+              marginBottom: "24px",
               marginLeft: "",
               border: "1px solid #CED4DA",
               background: "#F9F9F9",
@@ -98,8 +103,10 @@ const initialValues = {
             }}
           />
           {formik.touched.email && formik.errors.email && (
-              <div className="error" style={{color:"red"}}>{formik.errors.email}</div>
-            )}
+            <div className="error" style={{ color: "red" }}>
+              {formik.errors.email}
+            </div>
+          )}
           <button
             type="submit"
             className="btn btn-primary"
@@ -110,22 +117,20 @@ const initialValues = {
               background: "#F09021",
               border: "none",
               color: "white",
-              marginTop: "5px",
-              marginBottom: "20px",
+              
               fontWeight: "700",
               fontSize: "18px",
             }}
           >
             {"Submit"}
           </button>
-          
         </div>
       </form>
       {showDialog && (
-                <Dialog>
-                <EmailSentVerification/>
-              </Dialog>
-              )}
+        <Dialog>
+          <EmailSentVerification />
+        </Dialog>
+      )}
     </div>
   );
 };

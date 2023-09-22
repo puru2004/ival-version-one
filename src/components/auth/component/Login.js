@@ -9,7 +9,7 @@ import siteConfig from "../../../services/_siteConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUserSuccess } from "../state/_action";
 // import { addUserData } from "../../../state/actions/loginActions";
-import login_img from "../../../images/Rectangle 79.png";
+import login_img from "../../../images/Frame91.svg";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import ForgotPassword from "./ForgotPassword";
 import {
@@ -34,7 +34,7 @@ const initialValues = {
   password: "",
 };
 
-const Login = ({setShowForgotPassword,setShowLogin}) => {
+const Login = ({ setShowForgotPassword, setShowLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -46,10 +46,10 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
     (state) => state?.modalReducer?.isForgotPasswordModal
   );
 
- const toggleDialog = () =>{
-  setShowForgotPassword(true)
-  setShowLogin(false)
- }
+  const toggleDialog = () => {
+    setShowForgotPassword(true);
+    setShowLogin(false);
+  };
 
   const formik = useFormik({
     initialValues,
@@ -90,30 +90,36 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
   const handleRegisterClick = () => {
     navigate("/signup");
     setShowLogin(false);
-  }
+  };
+
+  // const mystyle = {
+  //   width:"100%", backgroundImage:`url(${login_img})`, height:"100%"
+  // }
+  // const myStyle1= {
+  //   width:"100%", height:"10%"
+  // }
 
   return (
     <>
-      <div style={{ width: "100%" }}>
+      <div>
         <img src={login_img} style={{ width: "100%" }} />
+        <div style={{}}></div>
       </div>
-      <div
-        className="login-container"
-        style={{ marginTop: "2rem", marginLeft: "2rem", marginRight: "2rem" }}
-      >
+      <div className="login-container" style={{ margin: "32px" }}>
         <form onSubmit={formik.handleSubmit}>
           <label
             style={{
               fontWeight: "600",
               fontSize: "14px",
               lineHeight: "19.6px",
+              color: "#556877",
             }}
           >
             Email
           </label>
           <div
             className="form-group"
-            style={{ width: "100%", marginTop: "3px" }}
+            style={{ width: "100%", marginTop: "5px" }}
           >
             <input
               type="email"
@@ -125,7 +131,7 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
               style={{
                 height: "48px",
                 width: "100%",
-                marginBottom: "15px",
+                marginBottom: "16px",
                 marginLeft: "",
                 border: "1px solid #CED4DA",
                 background: "#F9F9F9",
@@ -143,13 +149,14 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
               fontWeight: "600",
               fontSize: "14px",
               lineHeight: "19.6px",
+              color: "#556877",
             }}
           >
             Password
           </label>
           <div
             className="form-group"
-            style={{ width: "100%", marginTop: "3px" }}
+            style={{ width: "100%", marginTop: "5px" }}
           >
             <input
               type={showPassword ? "text" : "password"}
@@ -161,7 +168,7 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
               style={{
                 height: "48px",
                 width: "100%",
-                marginBottom: "15px",
+                // marginBottom: "15px",
                 marginLeft: "",
                 border: "1px solid #CED4DA",
                 background: "#F9F9F9",
@@ -178,7 +185,7 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
-                marginTop: "1rem",
+                marginTop: "16px",
               }}
               onClick={toggleDialog}
             >
@@ -193,7 +200,6 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
                 Forgot Password ?
               </div>
             </div>
-
           </div>
 
           <button
@@ -202,12 +208,12 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
             disabled={loading}
             style={{
               width: "100%",
-              height: "50px",
+              height: "48px",
               background: "#F09021",
               border: "none",
               color: "white",
-              marginTop: "5px",
-              marginBottom: "20px",
+              marginTop: "24px",
+
               fontWeight: "700",
               fontSize: "18px",
             }}
@@ -215,20 +221,26 @@ const Login = ({setShowForgotPassword,setShowLogin}) => {
             {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
-      </div>
-      <div
-        style={{
-          marginRight: "7rem",
-          marginLeft: "7rem",
-          fontWeight: "500",
-          fontSize: "16px",
-        }}
-      >
-        Don’t have an account ?
-        <span style={{ color: "#F09021", marginLeft: "10px" }}
-        onClick={handleRegisterClick}>
-          Register Now
-        </span>
+        <button
+          style={{
+            width: "100%",
+            height: "48px",
+            fontWeight: "500",
+            fontSize: "16px",
+            lineHeight: "24px",
+            border: "0px",
+            backgroundColor: "transparent",
+            color: "#1B3F58",
+          }}
+          onClick={handleRegisterClick}
+        >
+          Don’t have an account ?
+          <span
+            style={{ color: "#F09021", marginLeft: "10px", fontWeight: "600" }}
+          >
+            Register Now
+          </span>
+        </button>
       </div>
     </>
   );
