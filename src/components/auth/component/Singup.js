@@ -30,13 +30,14 @@ import { ENUM_API_STATUS } from "../../../utils/_gConstant";
 import { handleAPIErrors } from "../../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../ui-elements/_Toastify";
 import { Dialog } from "@progress/kendo-react-dialogs";
-import verifyEmail from "../../../Pages/modals/verifyEmail"
+import verifyEmail from "../../../Pages/modals/VerifyEmail"
 import "./Signup.css"
 import { useDispatch, useSelector } from "react-redux";
 import { loginModalAction } from "../../../state/commonActions/_commonActions";
 import ForgotPassword from "./ForgotPassword";
 import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
 import SwiperComponent from "../../swiper/SwiperComponent";
+import VerifyEmail from "../../../Pages/modals/VerifyEmail";
 
 const Singup = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const Singup = () => {
   const [showDialog , setShowDialog] = useState(false);
   const [showForgotPassword,setShowForgotPassword] = useState(false)
   const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [showRegistrationVerication, setShowRegistrationVerification] = useState(false);
    
 
   const toggleDialog = () =>{
@@ -56,9 +58,9 @@ const Singup = () => {
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
     console.log(res?.status);
-    toggleDialog();
     if (res?.status === 201) {
       handleAPIErrors(res?.Status);
+      setShowRegistrationVerification(true)
     } else {
       toastSuccess(res?.status);
     }
@@ -122,6 +124,11 @@ const Singup = () => {
             {showEmailVerification && (
               <Dialog>
                 <EmailSentVerification setShowEmailVerification = {setShowEmailVerification} setShowLogin={setShowDialog}/>
+              </Dialog>
+            )}
+            {showRegistrationVerication && (
+              <Dialog>
+                <VerifyEmail setShowRegistrationVerification={setShowRegistrationVerification}/>
               </Dialog>
             )}
             </div>

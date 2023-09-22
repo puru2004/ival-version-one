@@ -1,11 +1,18 @@
 import React from 'react'
 import sent_icon from "../../icons/sent.svg"
+import { useNavigate } from 'react-router-dom';
 
-const verifyEmail = () => {
+const VerifyEmail = ({setShowRegistrationVerification}) => {
+  const navigate = useNavigate();
+  const handleClick = () =>{
+    navigate('/');
+    setShowRegistrationVerification(false);
+  }
   return (
     <>
-    <div style={{ width: "100%" }}>
-      <img src={sent_icon} style={{ marginLeft: "40%", marginTop: "3%" }} />
+    <div style={{margin:"32px"}}>
+      <div style={{display:"flex", justifyContent:"center"}}><img src={sent_icon} /></div>
+      
       <div
         style={{
           fontFamily: "Figtree",
@@ -13,7 +20,7 @@ const verifyEmail = () => {
           fontSize: "24px",
           color: "#1B3F58",
           textAlign: "center",
-          marginTop: "10px",
+          marginTop: "24px",
         }}
       >
         Verifying Your Account
@@ -25,8 +32,8 @@ const verifyEmail = () => {
           fontWeight: "500",
           fontSize: "16px",
           color: "#556877",
-          marginTop: "10px",
-          marginBottom: "20px",
+          marginTop: "12px",
+          marginBottom: "32px",
         }}
       >
         Lorem ipsum dolor sit amet consectetur. Sociis sed <br /> at imperdiet
@@ -47,6 +54,7 @@ const verifyEmail = () => {
           fontWeight: "700",
           fontSize: "18px",
         }}
+        onClick={handleClick}
       >
         Okay, Got It
       </button>
@@ -55,4 +63,4 @@ const verifyEmail = () => {
   )
 }
 
-export default verifyEmail
+export default VerifyEmail
