@@ -1,66 +1,86 @@
-import React from 'react'
-import sent_icon from "../../icons/sent.svg"
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import sent_icon from "../../icons/sent.svg";
+import { useNavigate } from "react-router-dom";
 
-const VerifyEmail = ({setShowRegistrationVerification}) => {
+const VerifyEmail = ({ setShowRegistrationVerification }) => {
   const navigate = useNavigate();
-  const handleClick = () =>{
-    navigate('/');
+  const handleClick = () => {
+    navigate("/");
+    setShowRegistrationVerification(false);
+  };
+  const onClose = () =>{
     setShowRegistrationVerification(false);
   }
   return (
     <>
-    <div style={{margin:"32px"}}>
-      <div style={{display:"flex", justifyContent:"center"}}><img src={sent_icon} /></div>
-      
-      <div
-        style={{
-          fontFamily: "Figtree",
-          fontWeight: "600",
-          fontSize: "24px",
-          color: "#1B3F58",
-          textAlign: "center",
-          marginTop: "24px",
-        }}
-      >
-        Verifying Your Account
+      <div style={{ margin: "32px" }}>
+      <div style={{ textAlign: "right" }}>
+        <button
+          onClick={onClose} // Call the onClose prop when the close button is clicked
+          style={{
+            // position: "absolute",
+            cursor: "pointer",
+            color: "#1B3F58", // Change the color as needed
+            fontSize: "24px", // Adjust the font size as needed
+            backgroundColor:"transparent",
+            border:"0px"
+          }}
+        >
+          X {/* You can replace this with a close icon */}
+        </button>
       </div>
-      <div
-        style={{
-          textAlign: "center",
-          fontStyle: "Figtree",
-          fontWeight: "500",
-          fontSize: "16px",
-          color: "#556877",
-          marginTop: "12px",
-          marginBottom: "32px",
-        }}
-      >
-        Lorem ipsum dolor sit amet consectetur. Sociis sed <br /> at imperdiet
-        quam. Id molestie gravida etiam nisi
-        <br /> suscipit leo nulla id scelerisque.
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        style={{
-          width: "100%",
-          height: "50px",
-          background: "#F09021",
-          border: "none",
-          color: "white",
-          marginTop: "5px",
-          marginBottom: "20px",
-          fontWeight: "700",
-          fontSize: "18px",
-        }}
-        onClick={handleClick}
-      >
-        Okay, Got It
-      </button>
-    </div>
-    </>
-  )
-}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img src={sent_icon} />
+        </div>
 
-export default VerifyEmail
+        <div
+          style={{
+            fontFamily: "Figtree",
+            fontWeight: "600",
+            fontSize: "24px",
+            color: "#1B3F58",
+            textAlign: "center",
+            marginTop: "24px",
+          }}
+        >
+          Verifying Your Account
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            fontStyle: "Figtree",
+            fontWeight: "500",
+            fontSize: "16px",
+            color: "#556877",
+            marginTop: "12px",
+            marginBottom: "32px",
+          }}
+        >
+          Lorem ipsum dolor sit amet consectetur. Sociis sed <br /> at imperdiet
+          quam. Id molestie gravida etiam nisi
+          <br /> suscipit leo nulla id scelerisque.
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{
+            width: "100%",
+            height: "50px",
+            background: "#F09021",
+            border: "none",
+            color: "white",
+            marginTop: "5px",
+            marginBottom: "20px",
+            fontWeight: "700",
+            fontSize: "18px",
+          }}
+          onClick={handleClick}
+        >
+          Okay, Got It
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default VerifyEmail;

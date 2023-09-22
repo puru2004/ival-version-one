@@ -91,19 +91,31 @@ const Login = ({ setShowForgotPassword, setShowLogin }) => {
     navigate("/signup");
     setShowLogin(false);
   };
-
-  // const mystyle = {
-  //   width:"100%", backgroundImage:`url(${login_img})`, height:"100%"
-  // }
-  // const myStyle1= {
-  //   width:"100%", height:"10%"
-  // }
-
+  const handleCloseClick = () =>{
+    setShowLogin(false)
+  }
   return (
     <>
       <div>
+        <div>
         <img src={login_img} style={{ width: "100%" }} />
-        <div style={{}}></div>
+        <button
+          className="close-button"
+          onClick={handleCloseClick}
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            cursor: "pointer",
+            color: "White", // Change the color as needed
+            fontSize: "24px", // Adjust the font size as needed
+            backgroundColor:"transparent",
+            border:"0px"
+          }}
+        >
+          X {/* You can replace this with a close icon */}
+        </button>
+        </div>
       </div>
       <div className="login-container" style={{ margin: "32px" }}>
         <form onSubmit={formik.handleSubmit}>

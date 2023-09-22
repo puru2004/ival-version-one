@@ -38,6 +38,7 @@ import ForgotPassword from "./ForgotPassword";
 import EmailSentVerification from "../../../Pages/modals/EmailSentVerification";
 import SwiperComponent from "../../swiper/SwiperComponent";
 import VerifyEmail from "../../../Pages/modals/VerifyEmail";
+import login_img from "../../../images/Frame91.svg"
 
 const Singup = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,9 @@ const Singup = () => {
     setShowDialog(true);
   };
 
-  
+  const handleCloseDialog = () =>{
+    setShowDialog(false);
+  }
   
   const handleSubmit = async (dataItem) => {
     const res = await signupRequest(dataItem);
@@ -105,13 +108,14 @@ const Singup = () => {
                   background: "#F09021",
                   border: "none",
                   color: "white",
+                  borderRadius:"0px",
                 }}
                 onClick={toggleDialog}
               >
                 Login
               </Button>
               {showDialog && (
-                <Dialog >
+                <Dialog>
                 <Login setShowForgotPassword={setShowForgotPassword} setShowLogin ={setShowDialog}/>
               </Dialog>
               )}
@@ -390,6 +394,7 @@ const Singup = () => {
                           background: "#F09021",
                           border: "none",
                           color: "white",
+                          borderRadius:"0px"
                           
                         }}
                       >

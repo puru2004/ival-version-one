@@ -32,6 +32,10 @@ const ForgotPassword = ({
     setShowForgotPassword(false);
   };
 
+  const onClose = () =>{
+    setShowForgotPassword(false);
+  }
+
   const formik = useFormik({
     initialValues,
 
@@ -44,6 +48,21 @@ const ForgotPassword = ({
   });
   return (
     <div style={{ margin: "32px" }}>
+      <div style={{ textAlign: "right" }}>
+        <button
+          onClick={onClose} // Call the onClose prop when the close button is clicked
+          style={{
+            // position: "absolute",
+            cursor: "pointer",
+            color: "#1B3F58", // Change the color as needed
+            fontSize: "24px", // Adjust the font size as needed
+            backgroundColor:"transparent",
+            border:"0px"
+          }}
+        >
+          X {/* You can replace this with a close icon */}
+        </button>
+      </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={lockImage} style={{}} />
       </div>
