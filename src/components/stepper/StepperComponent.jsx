@@ -13,16 +13,16 @@ const StepperComponent = ({
   const getClipPath = (index) => {
     switch (index) {
       case 0:
-        return "polygon(75% 0%, 82% 50%, 75% 100%, 0% 100%, 0% 50%, 0% 0%)";
+        return "polygon(95% 0%, 100% 50%, 95% 100%, 0% 100%, 0% 50%, 0% 0%)";
       case steps.length - 1:
-        return "polygon(100% 0, 100% 50%, 100% 99%, 0% 100%, 10% 50%, 0% 0%)";
+        return "polygon(100% 0px, 100% 50%, 100% 99%, 0% 100%, 6% 50%, 0% 0%)";
       default:
         return "";
     }
   };
 
   return (
-    <div style={{ paddingLeft: "8rem", paddingRight: "8rem" }}>
+    <div style={{ padding:"100px 108px 24px 108px", width:"100%"}}>
       <div className="stepper-container">
         {steps?.map((step, index) => (
           <div

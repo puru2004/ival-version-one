@@ -119,7 +119,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -139,7 +139,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -159,7 +159,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -180,7 +180,7 @@ const Stage2 = ({ handleNextStep }) => {
                     style={{
                       border: "1px solid #CED4DA",
                       padding: "10px",
-                      width: "15rem",
+                      width: "13.9375rem",
                       display: "flex",
                       justifyContent: "space-between",
                       marginTop: "1rem",
@@ -204,7 +204,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -224,7 +224,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -247,7 +247,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -267,7 +267,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -287,7 +287,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -311,7 +311,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -331,7 +331,7 @@ const Stage2 = ({ handleNextStep }) => {
                   style={{
                     border: "1px solid #CED4DA",
                     padding: "10px",
-                    width: "15rem",
+                    width: "13.9375rem",
                     display: "flex",
                     justifyContent: "space-between",
                     marginTop: "1rem",
@@ -426,6 +426,29 @@ const Stage2 = ({ handleNextStep }) => {
               >
                 <div style={{ padding: "2rem" }}>
                   <div className="sub-heading">Detailed Programme</div>
+                  <div className="sub-sub-heading">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed.
+                  </div>
+                  <div className="drop-zone">
+                    <DropZone />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                style={{
+                  width: "48.1%",
+                  marginTop:"4rem",
+                  marginRight: "4rem",
+                  border: "1px solid #CED4DA",
+                  backgroundColor: "#F9F9F9",
+                }}
+              >
+                <div style={{ padding: "2rem" }}>
+                  <div className="sub-heading"> Plans</div>
                   <div className="sub-sub-heading">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                     sed.

@@ -41,7 +41,7 @@ const datepickerOptions = {
 };
 
 const Stage1 = ({ handleNextStep }) => {
-  const formData = useSelector((state) => state.formData.stageOneFormData);
+  const formData = useSelector((state) => state.formData?.stageOneFormData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Stage1 = ({ handleNextStep }) => {
     console.log("Data Item stg 1:", e);
     console.log("event");
 
-    if (e.isValid) {
+    if (e?.isValid) {
       const res = await stage1DataRequest(e.values);
       if (res?.data?.status === ENUM_API_STATUS.ERROR) {
         handleAPIErrors(res?.data);
@@ -96,7 +96,7 @@ const Stage1 = ({ handleNextStep }) => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                width:"100%"
               }}
             >
               <Field
@@ -106,7 +106,7 @@ const Stage1 = ({ handleNextStep }) => {
                 placeholder="Enter scheme name"
                 component={FormInput}
                 validator={nameValidator}
-                style={{ width: "350px", lineHeight: 2 }}
+                style={{}}
               />
               <Field
                 id={"schemeAddress"}
@@ -115,7 +115,7 @@ const Stage1 = ({ handleNextStep }) => {
                 component={FormInput}
                 validator={nameValidator}
                 placeholder="Enter scheme address"
-                style={{ width: "350px", lineHeight: 2 }}
+                style={{ }}
               />
               <Field
                 id={"postCode"}
@@ -124,87 +124,60 @@ const Stage1 = ({ handleNextStep }) => {
                 type={"Postcode"}
                 component={FormInput}
                 placeholder="Enter postcode"
-                style={{ width: "350px", lineHeight: 2 }}
+                style={{ }}
               />
             </div>
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                paddingTop: "1.5rem",
-                paddingBottom: "1.5rem",
+                width:"100%",
+                paddingTop:"32px"
               }}
             >
-              <label className="">Local Authority *</label>
+              {/* <label className="">Local Authority *</label> */}
               <DropDownList
                 name="localAuthority"
                 data={lastNameOptions}
+                label={"Local Authority"}
                 defaultValue={formData.localAuthority} // Set the default selected value
                 className="custom-dropdown"
-                style={{ width: "350px" }}
+                style={{  }}
               />
             </div>
             <h1 className="heading">Land Ownership</h1>
             <div
-              className=""
               style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
+                width:"100%"
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                }}
-              >
-                <label className="">Land Ownership Status *</label>
                 <DropDownList
                   name="landOwnershipStatus"
+                  label={"Land Ownership Status *"}
                   data={booleanOptions}
                   defaultValue={formData.landOwnershipStatus} // Set the default selected value
                   className="custom-dropdown"
-                  style={{ width: "350px" }}
+                  style={{  }}
                 />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                }}
-              >
-                <label className="">Land Election VAT </label>
+              
+              
                 <DropDownList
                   name="landElectionVAT"
+                  label={"Land Election VAT"}
                   data={booleanOptions}
                   defaultValue={booleanOptions[0]} // Set the default selected value
                   className="custom-dropdown"
-                  style={{ width: "350px" }}
+                  style={{ }}
                 />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                  width: "350px",
-                }}
-              >
-                <label className="">Land Completion/Acquisition Date</label>
+             
+              
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
                   defaultValue={new Date()} // Set the default selected date
-                  className="custom-datepicker" // Add a custom class to the DatePicker
-                  style={{ width: "350px" }}
+                  className="custom-datepicker"
+                  label={"Land Completion/Acquisition Date"} // Add a custom class to the DatePicker
+                  style={{ }}
                 />
-              </div>
             </div>
 
             <h1 className="heading">Planning Position</h1>
@@ -212,36 +185,26 @@ const Stage1 = ({ handleNextStep }) => {
               className=""
               style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                }}
-              >
-                <label className="">Planning Status</label>
                 <DropDownList
                   name="planningStatus"
+                  label={"Planning Status"}
                   data={booleanOptions}
                   defaultValue={booleanOptions[0]} // Set the default selected value
-                  className="custom-dropdown"
-                  style={{ width: "350px" }}
+                  // className="custom-dropdown"
+                  style={{  }}
                 />
-              </div>
+              
 
               <Field
                 id={"planningLink"}
                 name={"planningLink"}
                 label={"Planning Link(if applicable)"}
-                mask={"(999) 000-00-00-00"}
+                // mask={"(999) 000-00-00-00"}
                 component={FormMaskedTextBox}
                 // validator={phoneValidator}
-                style={{ width: "350px" }}
+                style={{ }}
               />
               <Field
                 id={"planningReference"}
@@ -250,112 +213,62 @@ const Stage1 = ({ handleNextStep }) => {
                 type={"text"}
                 component={FormInput}
                 // validator={emailValidator}
-                style={{ width: "350px", lineHeight: 2 }}
+                style={{ }}
               />
             </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                paddingTop: "1.5rem",
-                paddingBottom: "1.5rem",
-                width: "350px",
-              }}
-            >
-              <label className="">RMA/Detailed Planning *</label>
+              <div style={{marginTop:"32px"}}>
               <DatePicker
+              label={"RMA/Detailed Planning *"}
                 name="detailedPlanning"
                 {...datepickerOptions}
                 defaultValue={new Date()} // Set the default selected date
                 className="custom-datepicker" // Add a custom class to the DatePicker
-                style={{ width: "350px", lineHeight: 2 }}
+                style={{ }}
               />
-            </div>
+             </div>
 
             <h1 className="heading">Programme</h1>
             <div
               className=""
               style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                  width: "250px",
-                }}
-              >
-                <label className="">Start On Site *</label>
+              
+                
                 <DatePicker
                   name="dob"
+                  label={"Start On Site *"}
                   {...datepickerOptions}
                   defaultValue={new Date()} // Set the default selected date
-                  className="custom-datepicker" // Add a custom class to the DatePicker
-                  style={{ width: "250px", lineHeight: 2 }}
+                 
+                  style={{  }}
                 />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                  width: "250px",
-                }}
-              >
-                <label className="">GB Date *</label>
                 <DatePicker
                   name="dob"
+                  label={"GB Date *"}
                   {...datepickerOptions}
                   defaultValue={new Date()} // Set the default selected date
-                  className="custom-datepicker" // Add a custom class to the DatePicker
-                  style={{ width: "250px", lineHeight: 2 }}
+                  
                 />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                  width: "250px",
-                }}
-              >
-                <label className="">First Handover *</label>
                 <DatePicker
                   name="dob"
+                  label={"First Handover *"}
                   {...datepickerOptions}
                   defaultValue={new Date()} // Set the default selected date
-                  className="custom-datepicker" // Add a custom class to the DatePicker
-                  style={{ width: "250px", lineHeight: 2 }}
+                  
+                  style={{  }}
                 />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingTop: "1.5rem",
-                  paddingBottom: "1.5rem",
-                  width: "250px",
-                }}
-              >
-                <label className="">Last Handover *</label>
+               
                 <DatePicker
                   name="dob"
+                  label={"Last Handover *"}
                   {...datepickerOptions}
                   defaultValue={new Date()} // Set the default selected date
-                  className="custom-datepicker" // Add a custom class to the DatePicker
-                  style={{ width: "250px", lineHeight: 2 }}
+                  style={{  }}
                 />
-              </div>
             </div>
-
+              <div style={{marginTop:"32px"}}>
             <Field
               id={"rateOfDelivery"}
               name={"rateOfDelivery"}
@@ -365,6 +278,7 @@ const Stage1 = ({ handleNextStep }) => {
               // validator={emailValidator}
               style={{ width: "250px", lineHeight: 2 }}
             />
+            </div>
           </fieldset>
           <div className="container">
             <KendoButton

@@ -1,5 +1,6 @@
 .heading {
-  padding-top: 3rem;
+  padding-top: 56px;
+  padding-bottom: 24px;
   font-family: Figtree;
   font-size: 32px;
   font-weight: 600;
@@ -19,15 +20,16 @@
 
 .overlay {
   position: absolute;
-  right: 0;
-  top: 3.3rem;
-  width: 40%;
-  height: 3rem;
-  background-color: #ebebeb; /* Grey background with some opacity */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: grey; /* Text color */
+    right: 24px;
+    top: 2.1rem;
+    width: 40%;
+    height: 3rem;
+    background-color: #EBEBEB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+    border: 1px solid #CED4DA;
 }
 
 .overlay-Step4 {
@@ -65,10 +67,10 @@
   text-align: left;
   color: #556877;
 }
-.drop-zone {
+/* .drop-zone {
   height: 10rem;
   padding-top: 2rem;
-}
+} */
 
 .container {
   position: fixed; /* Fixed position */
@@ -86,6 +88,47 @@
 .k-input-solid {
   border-color: #CED4DA !important;
   background-color: #F9F9F9 !important;
+  height: 48px !important;
+  width: 392px !important;
+  margin-right: 24px !important;
 }
 
 /* Style for the button */
+
+.k-form{
+color: #556877 !important;
+font-family: Figtree !important;
+font-size: 14px !important;
+font-style: normal !important;
+font-weight: 600 !important;
+line-height: 140% !important; /* 19.6px */
+/* padding-bottom: 4px !important; */
+}
+
+.k-picker-solid{
+  border-color: #CED4DA !important;
+  background-color: #F9F9F9 !important;
+  height: 48px !important;
+  width: 392px !important;
+  border-radius: 0px !important;
+
+}
+.k-label{
+  color: #556877 !important;
+font-family: Figtree !important;
+font-size: 14px !important;
+font-style: normal !important;
+font-weight: 600 !important;
+line-height: 140% !important; /* 19.6px */
+
+}
+
+.k-form .k-floating-label-container{
+  width: 392px !important;
+  margin-right: 24px !important;
+  /* height: 48px !important; */
+}
+
+.k-floating-label-container{
+  margin-top: 12px !important;
+}
