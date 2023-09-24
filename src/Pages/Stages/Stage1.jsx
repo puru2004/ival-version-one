@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-
-import * as ReactDOM from "react-dom";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
 import {
@@ -23,42 +21,67 @@ import {
 import "./common.css";
 import { DropDownList } from "@progress/kendo-react-dropdowns";
 import { DatePicker } from "@progress/kendo-react-dateinputs";
+
 // import Stage from "./_request"
 import { stage1DataRequest } from "./store/request";
 import { ENUM_API_STATUS } from "../../utils/_gConstant";
 import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../components/ui-elements/_Toastify";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import KendoButton from "../../components/button/ButtonComponent";
+import { setStageOneFormData, fetchData } from "./state/_action";
 
 // Define the data for your dropdown options
 const lastNameOptions = ["Option 1", "Option 2", "Option 3"];
+const booleanOptions = ["Yes", "No"];
 
 // date picker options
 const datepickerOptions = {
   format: "dd/MM/yyyy", // Customize the date format as needed
 };
 
+const Stage1 = ({ handleNextStep }) => {
+  const formData = useSelector((state) => state.formData.stageOneFormData);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    // dispatch(fetchData());
+  }, [dispatch]);
 
-const Stage1 = () => {
-  
+  const handleSubmit = async (e) => {
+    console.log("Data Item stg 1:", e);
+    console.log("event");
 
-
-  const handleSubmit = async (dataItem) => {
-    const res = await stage1DataRequest(dataItem);
-    if (res?.data?.status === ENUM_API_STATUS.ERROR) {
-      handleAPIErrors(res?.data);
+    if (e.isValid) {
+      const res = await stage1DataRequest(e.values);
+      if (res?.data?.status === ENUM_API_STATUS.ERROR) {
+        handleAPIErrors(res?.data);
+      } else {
+        dispatch(setStageOneFormData(e.values));
+        toastSuccess(res?.data?.message);
+        handleNextStep();
+      }
     } else {
-      toastSuccess(res?.data?.message);
+      alert("validations error");
     }
   };
-  const user_id = useSelector((state) => state.login?.id);
-  console.log(user_id, "id");
 
   return (
     <Form
-      onSubmit={handleSubmit}
+      initialValues={{
+        schemeName: formData["schemeName"],
+        schemeAddress: formData["schemeAddress"],
+        rateOfDelivery: formData["rateOfDelivery"],
+        detailedPlanning: formData["detailedPlanning"],
+        planningReference: formData["planningReference"],
+        planningLink: formData["planningLink"],
+        planningStatus: formData["planningStatus"],
+        landElectionVAT: formData["landElectionVAT"],
+        landOwnershipStatus: formData["landOwnershipStatus"],
+        postCode: formData["postCode"],
+        user: "c013243a-de92-4ec2-b4f6-c8cd9acaaec5",
+      }}
+      onSubmitClick={() => handleSubmit()}
       render={(formRenderProps) => (
         <FormElement
           style={{
@@ -77,28 +100,30 @@ const Stage1 = () => {
               }}
             >
               <Field
-                id={"Scheme name *"}
-                name={"Scheme name *"}
+                id={"schemeName"}
+                name={"schemeName"}
                 label={"Scheme name *"}
+                placeholder="Enter scheme name"
                 component={FormInput}
-                // validator={nameValidator}
+                validator={nameValidator}
                 style={{ width: "350px", lineHeight: 2 }}
               />
               <Field
-                id={"Scheme address"}
-                name={"Scheme address"}
+                id={"schemeAddress"}
+                name={"schemeAddress"}
                 label={"Scheme address"}
                 component={FormInput}
-                // validator={nameValidator}
+                validator={nameValidator}
+                placeholder="Enter scheme address"
                 style={{ width: "350px", lineHeight: 2 }}
               />
               <Field
-                id={"Postcode"}
-                name={"Postcode"}
+                id={"postCode"}
+                name={"postCode"}
                 label={"Postcode"}
                 type={"Postcode"}
                 component={FormInput}
-                // validator={emailValidator}
+                placeholder="Enter postcode"
                 style={{ width: "350px", lineHeight: 2 }}
               />
             </div>
@@ -112,9 +137,9 @@ const Stage1 = () => {
             >
               <label className="">Local Authority *</label>
               <DropDownList
-                name="Local Authority *"
+                name="localAuthority"
                 data={lastNameOptions}
-                defaultValue={lastNameOptions[0]} // Set the default selected value
+                defaultValue={formData.localAuthority} // Set the default selected value
                 className="custom-dropdown"
                 style={{ width: "350px" }}
               />
@@ -138,9 +163,9 @@ const Stage1 = () => {
               >
                 <label className="">Land Ownership Status *</label>
                 <DropDownList
-                  name="Land Ownership Status"
-                  data={lastNameOptions}
-                  defaultValue={lastNameOptions[0]} // Set the default selected value
+                  name="landOwnershipStatus"
+                  data={booleanOptions}
+                  defaultValue={formData.landOwnershipStatus} // Set the default selected value
                   className="custom-dropdown"
                   style={{ width: "350px" }}
                 />
@@ -155,9 +180,9 @@ const Stage1 = () => {
               >
                 <label className="">Land Election VAT </label>
                 <DropDownList
-                  name="Land Election VAT "
-                  data={lastNameOptions}
-                  defaultValue={lastNameOptions[0]} // Set the default selected value
+                  name="landElectionVAT"
+                  data={booleanOptions}
+                  defaultValue={booleanOptions[0]} // Set the default selected value
                   className="custom-dropdown"
                   style={{ width: "350px" }}
                 />
@@ -199,32 +224,32 @@ const Stage1 = () => {
                   paddingBottom: "1.5rem",
                 }}
               >
-                <label className="">Last name</label>
+                <label className="">Planning Status</label>
                 <DropDownList
-                  name="lastName"
-                  data={lastNameOptions}
-                  defaultValue={lastNameOptions[0]} // Set the default selected value
+                  name="planningStatus"
+                  data={booleanOptions}
+                  defaultValue={booleanOptions[0]} // Set the default selected value
                   className="custom-dropdown"
                   style={{ width: "350px" }}
                 />
               </div>
 
               <Field
-                id={"phoneNumber"}
-                name={"phoneNumber"}
-                label={"Phone Number"}
+                id={"planningLink"}
+                name={"planningLink"}
+                label={"Planning Link(if applicable)"}
                 mask={"(999) 000-00-00-00"}
                 component={FormMaskedTextBox}
-                validator={phoneValidator}
+                // validator={phoneValidator}
                 style={{ width: "350px" }}
               />
               <Field
-                id={"email"}
-                name={"email"}
-                label={"Email"}
-                type={"email"}
+                id={"planningReference"}
+                name={"planningReference"}
+                label={"Planning Reference"}
+                type={"text"}
                 component={FormInput}
-                validator={emailValidator}
+                // validator={emailValidator}
                 style={{ width: "350px", lineHeight: 2 }}
               />
             </div>
@@ -238,9 +263,9 @@ const Stage1 = () => {
                 width: "350px",
               }}
             >
-              <label className="">Date of Birth</label>
+              <label className="">RMA/Detailed Planning *</label>
               <DatePicker
-                name="dob"
+                name="detailedPlanning"
                 {...datepickerOptions}
                 defaultValue={new Date()} // Set the default selected date
                 className="custom-datepicker" // Add a custom class to the DatePicker
@@ -266,7 +291,7 @@ const Stage1 = () => {
                   width: "250px",
                 }}
               >
-                <label className="">Date of Birth</label>
+                <label className="">Start On Site *</label>
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
@@ -284,7 +309,7 @@ const Stage1 = () => {
                   width: "250px",
                 }}
               >
-                <label className="">Date of Birth</label>
+                <label className="">GB Date *</label>
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
@@ -302,7 +327,7 @@ const Stage1 = () => {
                   width: "250px",
                 }}
               >
-                <label className="">Date of Birth</label>
+                <label className="">First Handover *</label>
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
@@ -320,7 +345,7 @@ const Stage1 = () => {
                   width: "250px",
                 }}
               >
-                <label className="">Date of Birth</label>
+                <label className="">Last Handover *</label>
                 <DatePicker
                   name="dob"
                   {...datepickerOptions}
@@ -332,23 +357,25 @@ const Stage1 = () => {
             </div>
 
             <Field
-              id={"email"}
-              name={"email"}
-              label={"Email"}
-              type={"email"}
+              id={"rateOfDelivery"}
+              name={"rateOfDelivery"}
+              label={"Rate of Delivery *"}
+              type={"text"}
               component={FormInput}
-              validator={emailValidator}
+              // validator={emailValidator}
               style={{ width: "250px", lineHeight: 2 }}
             />
           </fieldset>
           <div className="container">
-            <KendoButton type="submit"
+            <KendoButton
+              type="submit"
               style={{
                 padding: "0.75rem 1.25rem",
                 textDecoration: "none",
                 border: "none",
-                marginRight:"6rem"
+                marginRight: "6rem",
               }}
+              // onClick={handleNextStep}
             >
               Save & Next
             </KendoButton>

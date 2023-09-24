@@ -7,15 +7,15 @@ import { ENUM_API_STATUS } from "../../utils/_gConstant";
 import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../components/ui-elements/_Toastify";
 
-const Stage3 = () => {
-  const handleSubmit = async(dataItem)=>{
-    const res = await stage3DataRequest(dataItem)
-    if(res?.data?.status === ENUM_API_STATUS.ERROR){
-      handleAPIErrors(res?.data)
+const Stage3 = ({ handleNextStep }) => {
+  const handleSubmit = async (dataItem) => {
+    const res = await stage3DataRequest(dataItem);
+    if (res?.data?.status === ENUM_API_STATUS.ERROR) {
+      handleAPIErrors(res?.data);
     } else {
-      toastSuccess(res?.data?.message)
+      toastSuccess(res?.data?.message);
     }
-  }
+  };
   return (
     <>
       <div className="heading">Lorem ipsum dolor sit amet consectetur.</div>
@@ -24,10 +24,32 @@ const Stage3 = () => {
         pharetra porta cursus. Arcu dui elit integer arcu{" "}
       </div>
       <div style={{ paddingTop: "1.5rem" }}>
-        <KendoButton style={{padding: "0.75rem 1.25rem", textDecoration:'none', border:'none'}}>Download Sample </KendoButton>
+        <KendoButton
+          style={{
+            padding: "0.75rem 1.25rem",
+            textDecoration: "none",
+            border: "none",
+          }}
+        >
+          Download Sample{" "}
+        </KendoButton>
       </div>
       <div style={{ paddingTop: "2rem" }}>
         <DropZone />
+      </div>
+      <div className="container">
+        <KendoButton
+          type="submit"
+          style={{
+            padding: "0.75rem 1.25rem",
+            textDecoration: "none",
+            border: "none",
+            marginRight: "6rem",
+          }}
+          onClick={handleNextStep}
+        >
+          Save & Next
+        </KendoButton>
       </div>
     </>
   );

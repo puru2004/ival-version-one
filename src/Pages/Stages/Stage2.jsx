@@ -1,5 +1,4 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
 import "./common.css";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
@@ -27,26 +26,58 @@ import { stage2DataRequest } from "./store/request";
 import { ENUM_API_STATUS } from "../../utils/_gConstant";
 import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../components/ui-elements/_Toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { setStageTwoFormData } from "./state/_action";
+import KendoButton from "../../components/button/ButtonComponent";
 
-const Stage2 = () => {
-  const [selectedValue, setSelectedValue] = React.useState("first");
-  const handleChange = React.useCallback(
-    (e) => {
-      setSelectedValue(e.value);
-    },
-    [setSelectedValue]
-  );
-  const handleSubmit = async (dataItem) => {
-    const res = await stage2DataRequest(dataItem)
-    if(res?.data?.status === ENUM_API_STATUS.ERROR){
-      handleAPIErrors(res?.data)
-    } else {
-      toastSuccess(res?.data?.message)
+const Stage2 = ({ handleNextStep }) => {
+  const formData = useSelector((state) => state.formData.stageTwoFormData);
+  const dispatch = useDispatch();
+  const [selectedValue, setSelectedValue] = React.useState(
+    formData?.radioButton || {
+      epcRating: "epcRatingFirst",
+      ash: "ashYes",
+      pv: "pvFirst",
+      zeroCarbon: "zeroCarbonYes",
     }
-  }
+  );
+
+  console.log("selectedddddd", selectedValue);
+
+  // useEffect(() => {
+  //   if (formData?.radioButton.epcRating === "epcRatingFirst")
+  //     setSelectedValue(formData.radioButton);
+  // }, [formData?.radioButton]);
+
+  const handleChange = (e) => {
+    setSelectedValue((prev) => ({ ...prev, [e.target.element.name]: e.value }));
+  };
+
+  const handleSubmit = async (dataItem) => {
+    console.log("Stg2 data Item:", {
+      ...dataItem,
+      radioButton: { ...selectedValue },
+    });
+
+    const res = await stage2DataRequest(dataItem);
+    if (res?.data?.status === ENUM_API_STATUS.ERROR) {
+      handleAPIErrors(res?.data);
+    } else {
+      dispatch(
+        setStageTwoFormData({ ...dataItem, radioButton: { ...selectedValue } })
+      );
+      toastSuccess(res?.data?.message);
+      handleNextStep();
+    }
+  };
+
   return (
     <Form
-      onSubmit={handleSubmit}
+      initialValues={{
+        estateCharge: formData["estateCharge"],
+        serviceChargeFlats: formData["serviceChargeFlats"],
+      }}
+      onSubmitClick={handleSubmit}
       render={(formRenderProps) => (
         <FormElement style={{ width: "100%" }}>
           <fieldset className={"k-form-fieldset"}>
@@ -54,22 +85,24 @@ const Stage2 = () => {
             <div className="field-container">
               <div className="input-wrapper">
                 <Field
-                  id={"Service Charge Flats"}
-                  name={"Service Charge Flats"}
-                  label={"Service Charge Flats"}
+                  id={"Estate Charge"}
+                  name={"estateCharge"}
+                  label={"Estate Charge"}
                   component={FormInput}
-                  // validator={nameValidator}
+                  placeholder="£££££££"
+                  // validator={emailValidator}
                   style={{ width: "100%", lineHeight: 2 }}
                 />
                 <div className="overlay">per unit per annum</div>
               </div>
               <div className="input-wrapper" style={{ marginLeft: "2rem" }}>
                 <Field
-                  id={"Estate Charge"}
-                  name={"Estate Charge"}
-                  label={"Estate Charge"}
+                  id={"Service Charge Flats"}
+                  name={"serviceChargeFlats"}
+                  label={"Service Charge Flats"}
                   component={FormInput}
-                  // validator={emailValidator}
+                  placeholder="£££££££"
+                  // validator={nameValidator}
                   style={{ width: "100%", lineHeight: 2 }}
                 />
                 <div className="overlay">per unit per annum</div>
@@ -92,12 +125,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>First</div>
+                  <div>A</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="first"
-                      checked={selectedValue === "first"}
+                      name="epcRating"
+                      value="epcRatingFirst"
+                      checked={selectedValue.epcRating === "epcRatingFirst"}
                       onChange={handleChange}
                     />
                   </div>
@@ -112,12 +145,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Second</div>
+                  <div>B</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="second"
-                      checked={selectedValue === "second"}
+                      name="epcRating"
+                      value="epcRatingSecond"
+                      checked={selectedValue.epcRating === "epcRatingSecond"}
                       onChange={handleChange}
                     />
                   </div>
@@ -132,12 +165,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>C</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="epcRating"
+                      value="epcRatingthird"
+                      checked={selectedValue.epcRating === "epcRatingthird"}
                       onChange={handleChange}
                     />
                   </div>
@@ -153,12 +186,12 @@ const Stage2 = () => {
                       marginTop: "1rem",
                     }}
                   >
-                    <div>Fourth</div>
+                    <div>D</div>
                     <div>
                       <RadioButton
-                        name="group1"
-                        value="fourth"
-                        checked={selectedValue === "fourth"}
+                        name="epcRating"
+                        value="epcRatingFourth"
+                        checked={selectedValue.epcRating === "epcRatingFourth"}
                         onChange={handleChange}
                       />
                     </div>
@@ -177,12 +210,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>Yes</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="ash"
+                      value="ashYes"
+                      checked={selectedValue.ash === "ashYes"}
                       onChange={handleChange}
                     />
                   </div>
@@ -197,12 +230,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>No</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="ash"
+                      value="ashNo"
+                      checked={selectedValue.ash === "ashNo"}
                       onChange={handleChange}
                     />
                   </div>
@@ -220,12 +253,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>All</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="pv"
+                      value="pvFirst"
+                      checked={selectedValue.pv === "pvFirst"}
                       onChange={handleChange}
                     />
                   </div>
@@ -240,12 +273,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>Houses Only</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="pv"
+                      value="pvSecond"
+                      checked={selectedValue.pv === "pvSecond"}
                       onChange={handleChange}
                     />
                   </div>
@@ -260,12 +293,13 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>Apts Only</div>
                   <div>
                     <RadioButton
-                      name="group1 #CED4DA"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      // name="pv #CED4DA"
+                      name="pv"
+                      value="pvThird"
+                      checked={selectedValue.pv === "pvThird"}
                       onChange={handleChange}
                     />
                   </div>
@@ -283,12 +317,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>Yes</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="zeroCarbon"
+                      value="zeroCarbonYes"
+                      checked={selectedValue.zeroCarbon === "zeroCarbonYes"}
                       onChange={handleChange}
                     />
                   </div>
@@ -303,12 +337,12 @@ const Stage2 = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  <div>Third</div>
+                  <div>No</div>
                   <div>
                     <RadioButton
-                      name="group1"
-                      value="third"
-                      checked={selectedValue === "third"}
+                      name="zeroCarbon"
+                      value="zeroCarbonNo"
+                      checked={selectedValue.zeroCarbon === "zeroCarbonNo"}
                       onChange={handleChange}
                     />
                   </div>
@@ -321,7 +355,7 @@ const Stage2 = () => {
               <div
                 style={{
                   width: "50%",
-                  
+
                   marginRight: "4rem",
                   border: "1px solid #CED4DA",
                   backgroundColor: "#F9F9F9",
@@ -334,7 +368,7 @@ const Stage2 = () => {
                     sed.
                   </div>
                   <div className="drop-zone">
-                    <DropZone/>
+                    <DropZone />
                   </div>
                 </div>
               </div>
@@ -352,7 +386,7 @@ const Stage2 = () => {
                     sed.
                   </div>
                   <div className="drop-zone">
-                    <DropZone/>
+                    <DropZone />
                   </div>
                 </div>
               </div>
@@ -379,7 +413,7 @@ const Stage2 = () => {
                     sed.
                   </div>
                   <div className="drop-zone">
-                    <DropZone/>
+                    <DropZone />
                   </div>
                 </div>
               </div>
@@ -397,13 +431,27 @@ const Stage2 = () => {
                     sed.
                   </div>
                   <div className="drop-zone">
-                    <DropZone/>
+                    <DropZone />
                   </div>
                 </div>
               </div>
             </div>
           </fieldset>
-          
+
+          <div className="container">
+            <KendoButton
+              type="submit"
+              style={{
+                padding: "0.75rem 1.25rem",
+                textDecoration: "none",
+                border: "none",
+                marginRight: "6rem",
+              }}
+              // onClick={handleNextStep}
+            >
+              Save & Next
+            </KendoButton>
+          </div>
         </FormElement>
       )}
     />

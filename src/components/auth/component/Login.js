@@ -11,8 +11,6 @@ import { fetchAuthUserSuccess } from "../state/_action";
 // import { addUserData } from "../../../state/actions/loginActions";
 import login_img from "../../../images/Frame91.svg";
 import { Dialog } from "@progress/kendo-react-dialogs";
-import { Loader } from "@progress/kendo-react-indicators";
-
 import ForgotPassword from "./ForgotPassword";
 import {
   loginModalAction,
@@ -81,7 +79,7 @@ const Login = ({ setShowForgotPassword, setShowLogin }) => {
         setStatus("An error occurred during login");
         setSubmitting(false);
         setLoading(false);
-      }
+      } 
     },
   });
 
@@ -232,7 +230,7 @@ const Login = ({ setShowForgotPassword, setShowLogin }) => {
               fontSize: "18px",
             }}
           >
-            {loading ? <Loader type={"converging-spinner"} themeColor="white" /> : "Sign In"}
+            {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
         <button

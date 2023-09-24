@@ -5,6 +5,8 @@ import logo from "../../icons/logo.svg";
 import ButtonComponent from "../button/ButtonComponent";
 import { useSelector } from "react-redux";
 import { getUserDetails } from "./store/_request";
+
+
 const HeaderComponent = styled.div`
   .main {
     width: 100%;

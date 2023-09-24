@@ -30,10 +30,10 @@
   color: grey; /* Text color */
 }
 
-.overlay-Step4{
+.overlay-Step4 {
   position: absolute;
   right: 0;
-  top: 1.50rem;
+  top: 1.5rem;
   width: 40%;
   height: 3rem;
   background-color: #ebebeb; /* Grey background with some opacity */
@@ -66,24 +66,26 @@
   color: #556877;
 }
 .drop-zone {
-    height: 10rem;
-    padding-top: 2rem;
-  }
+  height: 10rem;
+  padding-top: 2rem;
+}
 
-  .container {
-   
-    position: fixed; /* Fixed position */
-    bottom: 0; /* Position it at the top of the viewport */
-    right: 0; /* Position it at the right of the viewport */
-    background-color: white;
-    height: 3rem;
-    width: 100%;
-    display: flex; /* Enable flex layout */
-    justify-content: flex-end; /* Move button to the right */
-    align-items: center; /* Vertically center the button */
-    /* z-index: 999; Optional: To make sure it's on top of other content */
-  }
-  
-  /* Style for the button */
-  
+.container {
+  position: fixed; /* Fixed position */
+  bottom: 0; /* Position it at the top of the viewport */
+  right: 0; /* Position it at the right of the viewport */
+  background-color: white;
+  height: 3rem;
+  width: 100%;
+  display: flex; /* Enable flex layout */
+  justify-content: flex-end; /* Move button to the right */
+  align-items: center; /* Vertically center the button */
+  z-index: 999; 
+}
 
+.k-input-solid {
+  border-color: #CED4DA !important;
+  background-color: #F9F9F9 !important;
+}
+
+/* Style for the button */

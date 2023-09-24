@@ -1,82 +1,76 @@
 /* StepperComponent.css */
 
-.k-input-inner{
+.k-input-inner {
   padding-block: 16px !important;
   padding-inline: 18px !important;
 }
 
 .stepper-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-  }
-  
-  .step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    clip-path:  polygon(70% 0%, 80% 50%, 70% 100%, 0% 100%, 10% 50%, 0% 0%);
-    background-color: #eee; 
-    height: 60px;
-    width:255px;
-    margin-top: 20px
-  }
-  
-  .step:last-child {
-    margin-right: 0; 
-    clip-path: polygon(30% 0%, 100% 50%, 30% 100%, 0% 100%, 70% 50%, 0% 0%);
-  }
-  
-  .step.active {
-    background-color: #ff9c6e; 
-    color:#fff
-  }
-  .step.completed {
-    
-    background-color: #ff5733; /* Light Orange */
-    color: #fff;
-  }
-  
-  .step-number {
-    /* width: 320px; */
-    height: 70px;
-   
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff5733; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 8px;
-   
-  }
-  
-  .step.active .step-number {
-    background-color: #ff9c6e; 
-    color: #fff; 
-  }
-  
-  .step-label {
-    font-size: 16px;
-    color: #333;
-    
-  }
-  .step-label-container {
-    position: absolute;
-    top: 100px; /* Adjust the distance from the arrow */
-    left: 0;
-    right: 0;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  
-  .active .step-label {
-    font-weight: bold;
-  }
-  
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  clip-path: polygon(70% 0%, 80% 50%, 70% 100%, 0% 100%, 10% 50%, 0% 0%);
+  background-color: #eee;
+  color: #1B3F58;
+  height: 60px;
+  width: 255px;
+  margin-top: 20px;
+}
+
+.step:last-child {
+  margin-right: 0;
+  clip-path: polygon(30% 0%, 100% 50%, 30% 100%, 0% 100%, 70% 50%, 0% 0%);
+}
+
+.step.active {
+  background-color: #f09021;
+  color: #fff;
+}
+.step.completed {
+  background-color: #1b3f58;
+  color: #fff;
+}
+
+.step-number {
+  /* width: 320px; */
+  height: 70px;
+
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.step.active .step-number {
+  /* background-color: #ff9c6e; */
+  color: #fff;
+}
+
+.step-label {
+  font-size: 16px;
+  color: #333;
+}
+.step-label-container {
+  position: absolute;
+  top: 100px; /* Adjust the distance from the arrow */
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.active .step-label {
+  font-weight: bold;
+}
