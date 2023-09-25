@@ -61,15 +61,26 @@ const CarouselHeader = styled.div`
   }
 
   .arrow-container {
+
     display: flex;
     width: 15%;
     justify-content: space-evenly;
 
     .icon-container {
-        .font-icons{
-            font-size: 3rem;
-        }
+      .font-icons {
+        font-size: 3rem;
+      }
+      .right-arrow {
+      }
     }
+
+    // .right {
+    //   border: 1px solid #000;
+    //   width: 80%;
+    //   .right-arrow {
+    //     width: 100%;
+    //   }
+    // }
   }
 `;
 
@@ -92,7 +103,7 @@ const CarouselSlide = styled.div`
 const SlideContent = styled.div`
   background: #1b3f58;
   color: #fff;
-  padding: 2rem;
+  padding: 32px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -157,7 +168,7 @@ const Slider = () => {
       <CarouselHeader>
         <h1 className="heading">What our customers are saying</h1>
         <div className="arrow-container">
-          <span className="icon-container" onClick={prevSlide}>
+          <span className="icon-container left" onClick={prevSlide}>
             <FontAwesomeIcon
               icon={faLongArrowLeft}
               size="lg"
@@ -165,12 +176,12 @@ const Slider = () => {
               className="font-icons"
             />
           </span>
-          <span className="icon-container" onClick={nextSlide}>
+          <span className="icon-container right" onClick={nextSlide}>
             <FontAwesomeIcon
               icon={faLongArrowRight}
-              size="lg"
+              size="100px"
               color={currentIndex === data.length - 1 ? "#ccc" : "orange"}
-              className="font-icons"
+              className="font-icons right-arrow"
             />
           </span>
         </div>

@@ -1,19 +1,14 @@
 
-  .drop-zone-upload {
-    font-family: Figtree;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #f09021;
+ 
+  
+  .k-dropzone-inner{
+    background-color: #f1d0aa !important;
+    border: 1px dashed #f09021 !important;
+    margin-top: 2rem;
   }
-  .drop-zone-text {
-    font-family: Figtree;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: black;
+
+  .k-upload .k-upload-button{
+    background-color: #F09021 !important;
+    border-radius: 0px !important;
+    color: white !important;
   }

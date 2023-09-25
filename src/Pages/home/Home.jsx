@@ -30,6 +30,7 @@ import { Dialog } from "@progress/kendo-react-dialogs";
 import Login from "../../components/auth/component/Login";
 import ForgotPassword from "../../components/auth/component/ForgotPassword";
 import EmailSentVerification from "../modals/EmailSentVerification";
+import ProgressBar from "../../components/progressBar/ProgressBar";
 
 // media queries for different screen sizes
 const mediaQueries = {
@@ -41,7 +42,7 @@ const mediaQueries = {
 const Navbar = styled.div`
   width: 100%;
   display: flex;
-  padding: 16px 5%;
+  padding: 20px 80px 10px;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.2px solid #fff;
@@ -90,6 +91,10 @@ const NavbarButtonContainer = styled.div`
   }
   .active {
     color: #f09021;
+  }
+
+  .getstarted-btn {
+    padding: 10px 10px 10px 10px;
   }
 `;
 
@@ -164,6 +169,7 @@ const HeroComponentInfo = styled.div`
 
           .sign-up-btn {
             width: 100%;
+            padding: 11px 20px;
           }
         }
       }
@@ -184,6 +190,7 @@ const HeroComponentInfo = styled.div`
 
       .signup-365 {
         width: 100%;
+        padding: 11px 20px;
       }
     }
   }
@@ -305,21 +312,25 @@ const EvaluationComponent = styled.div`
   gap: 3rem;
 
   .left {
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
     .left-img {
-      width: 80%;
-      height: auto;
-      background: lightgray 50% / cover no-repeat, #1b3f58;
+      width: 100%;
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
     }
   }
 
   .right {
-    width: 60%;
-    border: 1px solid red;
+    width: 50%;
+    display: flex;
+    gap: 30px;
   }
 `;
 
@@ -357,7 +368,7 @@ const VideoContainerComponent = styled.div`
   display: flex;
   background: #1b3f58;
   color: #fff;
-  height: 80vh;
+  height: 100vh;
   align-items: center;
   gap: 50px;
 
@@ -411,9 +422,9 @@ const VideoContainerComponent = styled.div`
 
 const CarouselComponent = styled.div`
   background: #fff;
-  height: 90vh;
-  padding: 50px 5% 20px;
-  // margin-top: 50px;
+  height: 100vh;
+  padding: 50px 5% 0px;
+  // margin-bottom: 50px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -443,15 +454,17 @@ const PartnerComponent = styled.div`
   }
 
   .partner-icons {
-    display: flex;
     width: 100%;
-    justify-content: space-between;
-    align-items: flex-end;
     padding: 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 
     img {
       width: 8.81rem;
       height: 3.5rem;
+      margin: 10px;
     }
   }
 `;
@@ -518,18 +531,17 @@ const VIDEO_PATH = "https://youtu.be/0BIaDVnYp2A";
 
 const Home = () => {
   const playerRef = useRef(null);
-  const [showDialog , setShowDialog] = useState(false);
-  const [showForgotPassword,setShowForgotPassword] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showEmailVerification, setShowEmailVerification] = useState(false);
-   
 
-  const toggleDialog=()=>{
+  const toggleDialog = () => {
     setShowDialog(true);
-  }
+  };
   const navigate = useNavigate();
-  const handleGetStarted = () =>{
+  const handleGetStarted = () => {
     navigate("/signup");
-  }
+  };
   return (
     <>
       <Navbar>
@@ -562,7 +574,10 @@ const Home = () => {
           <NavLink activeClassName="active" onClick={toggleDialog}>
             LogIn
           </NavLink>
-          <ButtonComponent className="getstarted-btn" onClick={handleGetStarted}>
+          <ButtonComponent
+            className="getstarted-btn"
+            onClick={handleGetStarted}
+          >
             get started
           </ButtonComponent>
         </NavbarButtonContainer>
@@ -618,8 +633,8 @@ const Home = () => {
               {/* <img className="currency" src={} alt="currency exchange" /> */}
             </span>
             <div className="numbers-info">
-              <span className="numbers">£ 200,000K</span>
-              <span className="info">VALUATIONS</span>
+              <span className="numbers">£ 2.1 Billon</span>
+              <span className="info">TENDERED</span>
             </div>
           </div>
           <div>
@@ -628,7 +643,7 @@ const Home = () => {
             </span>
             <div className="numbers-info">
               <span className="numbers">153</span>
-              <span className="info">LAND OWNERS</span>
+              <span className="info">OUR USERS</span>
             </div>
           </div>
           <div>
@@ -636,7 +651,7 @@ const Home = () => {
               <img src={handshake} alt="" />
             </span>
             <div className="numbers-info">
-              <span className="numbers">38</span>
+              <span className="numbers">72</span>
               <span className="info">PARTNERS</span>
             </div>
           </div>
@@ -645,18 +660,13 @@ const Home = () => {
 
       <EvaluationComponent>
         <div className="left">
-          <h1>We help you to Valuation & Tendering</h1>
+          <h1>Helping you maximise the value of your developments</h1>
           <div className="left-img">
             <img src="/valuationImg.png" alt="" />
           </div>
         </div>
         <div className="right">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, non?
-          Illo eum neque praesentium suscipit voluptates dignissimos fugiat
-          nulla pariatur error natus sint iste mollitia, harum fuga id dicta
-          voluptas quaerat sit et facilis! Deleniti voluptate nobis, cum
-          dignissimos earum culpa? Reprehenderit quidem voluptatem illo pariatur
-          iste vero accusantium dignissimos.
+          <ProgressBar />
         </div>
       </EvaluationComponent>
 
@@ -802,7 +812,7 @@ const Home = () => {
             platforms, but is open to anyone. To learn how to become a partner
             you can learn more here
           </p>
-          <ButtonComponent className="">Enquire</ButtonComponent>
+          <ButtonComponent className="enquire-btn">Enquire</ButtonComponent>
         </div>
         <div className="partner-icons">
           <img src={legal} alt="" />
@@ -811,6 +821,11 @@ const Home = () => {
           <img src={metropolitan} alt="" />
           <img src={hyde} alt="" />
           <img src={orbit} alt="" />
+          <img src={sage} alt="" />
+          <img src={places} alt="" />
+          <img src={metropolitan} alt="" />
+          <img src={places} alt="" />
+          <img src={metropolitan} alt="" />
         </div>
       </PartnerComponent>
 
@@ -837,21 +852,30 @@ const Home = () => {
 
       <Footer />
       {showDialog && (
-                <Dialog >
-                <Login setShowForgotPassword={setShowForgotPassword} setShowLogin ={setShowDialog}/>
-              </Dialog>
-              )}
-              
-              {showForgotPassword && (
-              <Dialog>
-                <ForgotPassword setShowEmailVerification={setShowEmailVerification} setShowForgotPassword={setShowForgotPassword}/>
-              </Dialog>
-            )}
-            {showEmailVerification && (
-              <Dialog>
-                <EmailSentVerification setShowEmailVerification = {setShowEmailVerification} setShowLogin={setShowDialog}/>
-              </Dialog>
-            )}
+        <Dialog>
+          <Login
+            setShowForgotPassword={setShowForgotPassword}
+            setShowLogin={setShowDialog}
+          />
+        </Dialog>
+      )}
+
+      {showForgotPassword && (
+        <Dialog>
+          <ForgotPassword
+            setShowEmailVerification={setShowEmailVerification}
+            setShowForgotPassword={setShowForgotPassword}
+          />
+        </Dialog>
+      )}
+      {showEmailVerification && (
+        <Dialog>
+          <EmailSentVerification
+            setShowEmailVerification={setShowEmailVerification}
+            setShowLogin={setShowDialog}
+          />
+        </Dialog>
+      )}
     </>
   );
 };

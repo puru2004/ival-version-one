@@ -1,8 +1,9 @@
 .panelbar-wrapper {
-  max-width: 70vw;
-  height: 70vh;
-  margin: 0 auto;
-  padding: 7rem 5%;
+  width: 70vw;
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0 auto 40px;
+  padding: 100px 50px;
   display: flex;
   flex-direction: column;
 }
@@ -31,6 +32,40 @@
   cursor: pointer;
 }
 
-/* .k-svg-icon > svg {
-      display: none;
-  } */
+.k-panelbar-item-text {
+  color: #1b3f58;
+  font-family: Figtree;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 31px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.k-panelbar-content,
+.k-content {
+  font-family: Figtree;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.k-panelbar,
+.k-pos-relative {
+  border: none !important;
+}
+
+.k-link,
+.k-selected {
+  outline: 0 !important;
+}
+
+.k-svg-icon > svg {
+  display: none !important;
+}
+
+.k-svg-icon > svg::before {
+  content: "\002B" !important;
+}

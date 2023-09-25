@@ -34,15 +34,16 @@
 
 .overlay-Step4 {
   position: absolute;
-  right: 0;
-  top: 1.5rem;
-  width: 40%;
-  height: 3rem;
-  background-color: #ebebeb; /* Grey background with some opacity */
+  right: 87px;
+  top: 0.9rem;
+  width: 30%;
+  height: 2.9rem;
+  background-color: #ebebeb;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: grey; /* Text color */
+  color: grey;
+  border: 1px solid#CED4DA;
 }
 
 .input-wrapper {
@@ -132,4 +133,23 @@ line-height: 140% !important; /* 19.6px */
 
 .k-floating-label-container{
   margin-top: 12px !important;
+}
+
+.k-radio:checked{
+  background-color: #F09021 !important;
+  border-color: #F09021 !important;
+  color: #F09021 !important;
+}
+
+.k-upload .k-file-success .k-file-validation-message{
+  color: #F09021 !important;
+}
+
+.k-checkbox-md {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 0px !important;
+}
+.k-checkbox {
+  margin: 10px !important;
 }

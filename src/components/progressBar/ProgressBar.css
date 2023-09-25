@@ -1,0 +1,43 @@
+/* CSS for Highlighted Paragraph */
+.highlight-paragraph {
+  transition: background-color 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.highlighted {
+  background-color: orange; /* Highlighted background color */
+  color: white; /* Text color when highlighted */
+}
+
+
+.vertical-progress-bar {
+  display: flex;
+  flex-direction: column; /* Display progress from top to bottom */
+  align-items: center;
+  width: 10%; /* Adjust width as needed */
+  height: 60%;
+  background-color: #ccc;
+  position: relative;
+}
+
+.vertical-progress {
+  background-color: orange;
+  transition: height 0.3s;
+  width: 100%;
+  position: absolute;
+  top: 0; /* Start progress from the top */
+  left: 0;
+}
+
+.number {
+  font-family: Figtree;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  transform: rotate(-90deg);
+}
+/* .number span {
+  color:  #9a9a9a;
+  display: block;
+} */
