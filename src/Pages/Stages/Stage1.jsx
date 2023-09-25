@@ -41,6 +41,7 @@ const datepickerOptions = {
 };
 
 const Stage1 = ({ handleNextStep }) => {
+  const user_id = useSelector((state) => state.authReducer?.user?.id);
   const formData = useSelector((state) => state.formData?.stageOneFormData);
   const dispatch = useDispatch();
 
@@ -61,9 +62,7 @@ const Stage1 = ({ handleNextStep }) => {
         toastSuccess(res?.data?.message);
         handleNextStep();
       }
-    } else {
-      alert("validations error");
-    }
+    } 
   };
 
   return (
@@ -79,9 +78,9 @@ const Stage1 = ({ handleNextStep }) => {
         landElectionVAT: formData["landElectionVAT"],
         landOwnershipStatus: formData["landOwnershipStatus"],
         postCode: formData["postCode"],
-        user: "c013243a-de92-4ec2-b4f6-c8cd9acaaec5",
+        user: user_id,
       }}
-      onSubmitClick={() => handleSubmit()}
+      onSubmitClick={(e) => handleSubmit(e)}
       render={(formRenderProps) => (
         <FormElement
           style={{

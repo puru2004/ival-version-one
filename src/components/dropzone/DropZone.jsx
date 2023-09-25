@@ -8,18 +8,23 @@ const note = <span className="drop-zone-text">or drag and drop files here</span>
 const DropZone = () => {
   return (
     <div>
-      <ExternalDropZone
-        uploadRef={uploadRef}
-        customHint={hint}
-        customNote={note}
+      <ExternalDropZone uploadRef={uploadRef} />
+      <div
         style={{
-          height: "10rem",
-          backgroundColor: "antiquewhite",
-          border:'2px dashed #F09021'
+          height: "50px",
         }}
       />
-     
-      
+      <Upload
+        ref={uploadRef}
+        batch={false}
+        multiple={true}
+        defaultFiles={[]}
+        withCredentials={false}
+        saveUrl={"https://demos.telerik.com/kendo-ui/service-v4/upload/save"}
+        removeUrl={
+          "https://demos.telerik.com/kendo-ui/service-v4/upload/remove"
+        }
+      />
     </div>
   );
 };

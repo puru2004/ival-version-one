@@ -6,6 +6,7 @@ import { stage3DataRequest } from "./store/request";
 import { ENUM_API_STATUS } from "../../utils/_gConstant";
 import { handleAPIErrors } from "../../utils/_gFunctions/_handleAPI";
 import { toastSuccess } from "../../components/ui-elements/_Toastify";
+import { Form } from "@progress/kendo-react-form";
 
 const Stage3 = ({ handleNextStep }) => {
   const handleSubmit = async (dataItem) => {
@@ -18,6 +19,7 @@ const Stage3 = ({ handleNextStep }) => {
   };
   return (
     <>
+    
       <div className="heading">Lorem ipsum dolor sit amet consectetur.</div>
       <div className="sub-sub-heading" style={{ paddingTop: "1.5rem" }}>
         Lorem ipsum dolor sit amet consectetur. Ac tellus ut quis vel et egestas
